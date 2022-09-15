@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { Header } from "../components";
+import { Header, Footer } from "../components";
 import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
@@ -24,6 +24,8 @@ const Home: NextPage = () => {
           {hello.data ? <p>{hello.data.greeting}</p> : <p>Loading..</p>}
         </div>
       </main>
+
+      <Footer />
     </>
   );
 };
