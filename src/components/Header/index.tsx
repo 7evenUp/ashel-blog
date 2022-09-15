@@ -7,7 +7,7 @@ export default function Header() {
   console.log(router.pathname)
 
   return (
-    <div className="w-full flex items-center justify-center border-b border-slate-700 py-4 sticky top-0">
+    <div className="w-full flex items-center justify-center border-b border-slate-700 py-4 sticky top-0 bg-white z-10">
       <ul className="flex gap-10">
         <li className={router.pathname === '/' ? 'font-semibold' : ''}>
           <Link href="/">

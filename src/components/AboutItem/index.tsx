@@ -3,27 +3,16 @@ import { AboutItemType } from '../../types/AboutItemType'
 
 export default function AboutItem({heading, body, link}: AboutItemType) {
   return (
-    <>
-      {link !== undefined ? (
-        <a href={link}>
-          <h2 className="text-[5rem] leading-normal font-extrabold text-white drop-shadow-[0_0_1px_rgb(0,0,0)]">
-            {heading}
-          </h2>
-          <p>
-            {body}
-          </p>
-        </a>
-      ) : (
-        <div>
-          <h2 className="text-[5rem] leading-normal font-extrabold text-white drop-shadow-[0_0_1px_rgb(0,0,0)]">
-            {heading}
-          </h2>
-          <p>
-            {body}
-          </p>
-        </div>
-      )}
-    </>
-    
+    <a href={link} className="group flex justify-between gap-10">
+      <div className="border-b">
+        <h2 className="font-serif text-5xl text-white drop-shadow-[0_0_1px_rgb(0,0,0)] w-[322px]">
+          {heading}
+        </h2>
+      </div>
+      
+      <p className="text-lg leading-7 grow shrink border-b xl:w-[700px]">
+        {body}
+      </p>
+    </a>
   )
 }

@@ -18,10 +18,7 @@ const Home: NextPage = () => {
       <Header />
 
       <main className="container mx-auto flex flex-col items-center justify-center min-h-screen p-4">
-        <h1 className="text-[5rem] leading-normal font-extrabold text-white drop-shadow-[0_0_1px_rgb(0,0,0)]">
-          Блог
-        </h1>
-        <div>
+        <div className="flex flex-col gap-20">
           {aboutData.map((aboutItem, i) => (
             <AboutItem key={i} {...aboutItem} />
           ))}
