@@ -4,7 +4,8 @@ export default function Contacts() {
   return (
     <div className="flex flex-col items-center gap-8 border-t border-b py-10">
       <h3>Полезные ссылки</h3>
-      <div className="flex items-center gap-8 font-serif text-3xl text-white tracking-widest drop-shadow-[0_0_1px_rgb(0,0,0)] uppercase">
+      <div className="flex flex-col items-start gap-5 text-2xl font-serif text-white drop-shadow-[0_0_1px_rgb(0,0,0)] uppercase
+                      md:flex-row md:items-center md:gap-8 md:text-3xl md:tracking-widest">
         <ul className="flex flex-col gap-5 list-disc">
           <li className="hover:text-slate-700 hover:drop-shadow-none transition-all">
             <a href="https://vk.com/aptem_oxa" target="_blank">Вконтакте</a>
