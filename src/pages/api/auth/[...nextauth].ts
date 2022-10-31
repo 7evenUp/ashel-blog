@@ -1,7 +1,7 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import DiscordProvider from "next-auth/providers/discord";
-import CredentialsProvider from "next-auth/providers/credentials"
+import CredentialsProvider from "next-auth/providers/credentials";
 
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
@@ -12,32 +12,35 @@ export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
     session: ({ session, token }) => {
-      console.log(token)
-      if (session.user && token.sub) session.user.id = token.sub
-      return session
-    }
+      console.log(token);
+      if (session.user && token.sub) session.user.id = token.sub;
+      return session;
+    },
   },
   // Configure one or more authentication providers
   // adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
-      name: 'Credensials',
+      name: "Credensials",
       credentials: {
-        username: { label: 'Username', type: 'text' },
-        password: { label: 'Password', type: 'password' }
+        username: { label: "Username", type: "text" },
+        password: { label: "Password", type: "password" },
       },
       authorize: async (credentials, req) => {
-        console.log(env.CREDENTIALS_USERNAME, env.CREDENTIALS_PASSWORD)
-        if (credentials?.username === env.CREDENTIALS_USERNAME && credentials.password === env.CREDENTIALS_PASSWORD) {
+        console.log(env.CREDENTIALS_USERNAME, env.CREDENTIALS_PASSWORD);
+        if (
+          credentials?.username === env.CREDENTIALS_USERNAME &&
+          credentials.password === env.CREDENTIALS_PASSWORD
+        ) {
           return {
             username: credentials.username,
-            email: 'sheludeshev.artyom@mail.ru',
-          }
+            email: "sheludeshev.artyom@mail.ru",
+          };
         }
 
-        return null
-      }
-    })
+        return null;
+      },
+    }),
   ],
 };
 
