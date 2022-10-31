@@ -3,7 +3,7 @@ import { Footer, Header } from "../../components";
 import { trpc } from "../../utils/trpc";
 
 const Blog: NextPage = () => {
-  const x = trpc.useQuery(['example.hello'])
+  const x = trpc.useQuery(["example.hello"]);
 
   return (
     <>
@@ -20,4 +20,4 @@ const Blog: NextPage = () => {
   );
 };
 
-export default Blog
+export default Blog;

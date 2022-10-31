@@ -1,17 +1,15 @@
 import type { GetServerSideProps, NextPage } from "next";
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signIn, signOut } from "next-auth/react";
 import { Footer, Header } from "../../components";
 import { getServerAuthSession } from "../../server/common/get-server-auth-session";
-import { trpc } from "../../utils/trpc";
 
 const Login: NextPage = () => {
-  const { data: session } = useSession()
-  const x = trpc.useQuery(['example.hello'])
+  const { data: session } = useSession();
 
   const makeRequest = async () => {
-    const res = await fetch('api/restricted')
-    console.log(await res.json())
-  }
+    const res = await fetch("api/restricted");
+    console.log(await res.json());
+  };
 
   return (
     <>
@@ -44,17 +42,17 @@ const Login: NextPage = () => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerAuthSession(context);
-  
+
   if (session) {
     return {
       redirect: {
-        destination: '/admin',
-        permanent: false
-      }
-    }
+        destination: "/admin",
+        permanent: false,
+      },
+    };
   }
 
-  return { props: {} }
-}
+  return { props: {} };
+};
 
-export default Login
+export default Login;

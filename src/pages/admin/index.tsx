@@ -1,11 +1,11 @@
 import type { GetServerSideProps, NextPage } from "next";
-import { useSession, signOut } from "next-auth/react"
+import { useSession, signOut } from "next-auth/react";
 import { Footer, Header } from "../../components";
 import { getServerAuthSession } from "../../server/common/get-server-auth-session";
 
 const Admin: NextPage = () => {
-  const { data: session } = useSession()
-  console.log('Session in client', session)
+  const { data: session } = useSession();
+  console.log("Session in client", session);
   return (
     <>
       <Header />
@@ -24,21 +24,21 @@ const Admin: NextPage = () => {
   );
 };
 
-export default Admin
+export default Admin;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerAuthSession(context);
 
-  console.log('Session in Server', session)
-  
+  console.log("Session in Server", session);
+
   if (!session) {
     return {
       redirect: {
-        destination: '/login',
-        permanent: false
-      }
-    }
+        destination: "/login",
+        permanent: false,
+      },
+    };
   }
 
-  return { props: { session } }
-}
+  return { props: { session } };
+};
