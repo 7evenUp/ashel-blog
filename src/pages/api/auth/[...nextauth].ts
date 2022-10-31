@@ -12,7 +12,7 @@ export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
     session: ({ session, token }) => {
-      console.log(token);
+      console.log('Token value in nextauth callbacks: ', token);
       if (session.user && token.sub) session.user.id = token.sub;
       return session;
     },
@@ -27,14 +27,15 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       authorize: async (credentials, req) => {
-        console.log(env.CREDENTIALS_USERNAME, env.CREDENTIALS_PASSWORD);
         if (
           credentials?.username === env.CREDENTIALS_USERNAME &&
           credentials.password === env.CREDENTIALS_PASSWORD
         ) {
           return {
+            name: 'Artyom Shel',
             username: credentials.username,
             email: "sheludeshev.artyom@mail.ru",
+            image: null
           };
         }
 
