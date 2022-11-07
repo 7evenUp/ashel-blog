@@ -4,7 +4,7 @@ import { supabase } from "../../../supabase/supabaseClient";
 
 type ImageWrapperProps = {
   title: string
-  desc: string
+  desc: string | null
   src: string
 };
 

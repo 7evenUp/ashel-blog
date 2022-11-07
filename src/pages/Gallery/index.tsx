@@ -1,27 +1,10 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
 import { Footer, Header } from "../../components";
-import { supabase } from "../../supabase/supabaseClient";
+import { trpc } from "../../utils/trpc";
 import ImageWrapper from "./components/ImageWrapper";
 
 const Gallery: NextPage = () => {
-  const [data, setData] = useState([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from('Photo')
-        .select('*')
-
-      if (error) console.error(error)
-
-      console.log(data)
-
-      setData(data)
-    }
-
-    fetchData()
-  }, [])
+  const { data, error, isLoading } = trpc.useQuery(["example.getAll"]);
 
   return (
     <>
@@ -32,7 +15,9 @@ const Gallery: NextPage = () => {
           Здесь крутые фотокарточки!
         </h1>
         <div>
-          {data.map(el => {
+          {error && <p>Error happend here: {error.message}</p>}
+          {isLoading && <p>Loading photos...</p>}
+          {data && data.map(el => {
             return (
               <ImageWrapper key={el.id} title={el.title} desc={el.desc} src={el.src} />
             )
