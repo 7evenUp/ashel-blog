@@ -5,19 +5,27 @@ import { withTRPC } from "@trpc/next";
 import { SessionProvider } from "next-auth/react";
 import type { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
-import { Layout } from "../components";
+import { AdminLayout, Layout } from "../components";
 import type { AppRouter } from "../server/router";
 import "../styles/globals.css";
 
 const MyApp: AppType = ({
   Component,
   pageProps: { session, ...pageProps },
+  router
 }) => {
+
   return (
     <SessionProvider session={session}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      {router.pathname.includes('admin') ? (
+        <AdminLayout>
+          <Component {...pageProps} />
+        </AdminLayout>
+      ) : (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      )}
     </SessionProvider>
   );
 };
