@@ -9,7 +9,7 @@ type ImageWrapperProps = {
 };
 
 const ImageWrapper = ({title, desc, src}: ImageWrapperProps) => {
-  const [avatarUrl, setAvatarUrl] = useState("")
+  const [photoUrl, setPhotoUrl] = useState("")
 
   const downloadImage = async (path: string) => {
     try {
@@ -20,7 +20,7 @@ const ImageWrapper = ({title, desc, src}: ImageWrapperProps) => {
       if (error) throw error
 
       const url = URL.createObjectURL(data)
-      setAvatarUrl(url)
+      setPhotoUrl(url)
     } catch (error) {
       console.log('Error downloading image: ', error)
     }
@@ -35,7 +35,7 @@ const ImageWrapper = ({title, desc, src}: ImageWrapperProps) => {
       <h1>Title: {title}</h1>
       <p>Description: {desc}</p>
       <Image
-        src={avatarUrl}
+        src={photoUrl}
         alt="Avatar"
         width={300}
         height={300}
