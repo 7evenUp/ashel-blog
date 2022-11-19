@@ -1,5 +1,7 @@
-import { GetStaticPropsContext } from "next";
+import { GetStaticPaths, GetStaticPropsContext } from "next";
 import React, { useEffect, useState } from "react";
+import { prisma } from "../../../server/db/client";
+import { trpc } from "../../../utils/trpc";
 
 const Post = () => {
   return (
@@ -16,12 +18,22 @@ const Post = () => {
   );
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await prisma.post.findMany({
+    select: {
+      id: true
+    }
+  })
 
-  return { paths: [{ params: { id: '1' }}], fallback: false }
+  console.log('Hello from getStaticPaths')
+
+  return {
+    paths: posts.map(post => ({ params: { id: `${post.id}` }})),
+    fallback: false
+  }
 }
 
-export async function getStaticProps(context: GetStaticPropsContext) {
+export async function getStaticProps(context: GetStaticPropsContext<{ id: string }>) {
   if (typeof context.params?.id === "string") {
 
     return {
