@@ -1,22 +1,6 @@
-import { GetStaticPaths, GetStaticPropsContext } from "next";
+import { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import React, { useEffect, useState } from "react";
 import { prisma } from "../../../server/db/client";
-import { trpc } from "../../../utils/trpc";
-
-const Post = () => {
-  return (
-    <main className="container mx-auto flex flex-col items-center min-h-screen p-4 gap-8">
-      <div className="flex flex-col gap-2">
-        <div>
-          <label>Heading</label>
-        </div>
-        <div>
-          <label>Description</label>
-        </div>
-      </div>
-    </main>
-  );
-};
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await prisma.post.findMany({
@@ -33,13 +17,43 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export async function getStaticProps(context: GetStaticPropsContext<{ id: string }>) {
-  if (typeof context.params?.id === "string") {
+export const getStaticProps = async (context: GetStaticPropsContext<{id: string}>) => {
+  if (context.params?.id) {
+    const post = await prisma.post.findFirst({
+      where: {
+        id: parseInt(context.params?.id)
+      },
+    })
 
-    return {
-      props: { str: 'string' },
-    };
+    if (post !== null) {
+      return {
+        props: { post },
+      }
+    }
+  }
+
+  return {
+    props: {
+      error: 'Error'
+    }
   }
 }
+
+const Post = ({post, error}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  return (
+    <main className="container mx-auto flex flex-col items-center min-h-screen p-4 gap-8">
+      <div className="flex flex-col gap-2">
+        {error && <h1>Error occured!</h1>}
+        
+        {post !== undefined && 
+          <div>
+            <h1>{post.title}</h1>
+            
+          </div>
+        }
+      </div>
+    </main>
+  );
+};
 
 export default Post;
