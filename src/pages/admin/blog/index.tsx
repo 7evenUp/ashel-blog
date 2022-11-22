@@ -1,11 +1,25 @@
 import type { GetServerSideProps, NextPage } from "next";
+import Link from "next/link";
 import router from "next/router";
 import { getServerAuthSession } from "../../../server/common/get-server-auth-session";
 import { trpc } from "../../../utils/trpc";
 
 const Blog: NextPage = () => {
-  const { data: posts, error, isLoading } = trpc.useQuery(["posts.getAll"]);
-  const postMutation = trpc.useMutation(["posts.create"])
+  const { data: posts, error, isLoading, refetch } = trpc.useQuery(["posts.getAll"]);
+  const createMutation = trpc.useMutation(["posts.create"])
+  const deleteMutation = trpc.useMutation(["posts.delete"])
+
+  const handleCreate = async () => {
+    await createMutation.mutateAsync({title: ""}, {
+      onSuccess: data => { router.push(`/admin/blog/${data.id}`) },
+    })
+  }
+
+  const handleDelete = async (postId: number) => {
+    await deleteMutation.mutateAsync({id: postId}, {
+      onSuccess: () => { refetch() },
+    })
+  }
 
   if (error) return <h1>Error while loading: {error.message}</h1>
 
@@ -20,23 +34,28 @@ const Blog: NextPage = () => {
         <button
           type="button"
           className="py-1 px-2 bg-slate-300 rounded-md ml-auto"
-          onClick={async () => {
-            await postMutation.mutateAsync({title: ""}, {
-              onSuccess(data, variables, context) {
-                if (data) router.push(`/admin/blog/${data.id}`);
-              },
-            })
-          }}
-        >{postMutation.isLoading ? "Creating new post..." : "Create post"}</button>
+          onClick={handleCreate}
+        >{createMutation.isLoading ? "Creating new post..." : "Create post"}</button>
       </div>
       
       <div className="grid grid-cols-4 gap-4 w-full mt-4">
         {posts && posts.map((post) => (
           <div
             key={post.id}
-            className=""
+            className="flex flex-col gap-4 bg-slate-200 rounded-xl py-2 px-4 relative"
           >
-            {post.id}: {post.title}
+            {post.published && <span className="absolute w-3 h-3 rounded-full bg-red-400 top-2 right-4"/>}
+            <span>{post.id}: {post.title}</span>
+            <span>{new Date(post.createdAt).toDateString()}</span>
+            <div className="flex gap-6 justify-between">
+              <Link href={`/admin/blog/${post.id}`}>
+                <a className="w-1/2 rounded-md bg-slate-50 hover:bg-slate-300 transition-all py-1 text-center">edit</a>
+              </Link>
+              <button
+                onClick={() => handleDelete(post.id)}
+                className="w-1/2 rounded-md bg-slate-50 hover:bg-slate-300 transition-all py-1"
+              >delete</button>
+            </div>
           </div>
         ))}
       </div>

@@ -27,7 +27,12 @@ export const getStaticProps = async (context: GetStaticPropsContext<{id: string}
 
     if (post !== null) {
       return {
-        props: { post },
+        props: {
+          post: {
+            ...post,
+            createdAt: new Date(post.createdAt).toDateString()
+          }
+        },
       }
     }
   }
@@ -48,7 +53,7 @@ const Post = ({post, error}: InferGetStaticPropsType<typeof getStaticProps>) => 
         {post !== undefined && 
           <div>
             <h1>{post.title}</h1>
-            
+            <span>Created at: {post.createdAt}</span>
           </div>
         }
       </div>

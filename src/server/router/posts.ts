@@ -13,8 +13,22 @@ export const postsRouter = createRouter()
     }),
     resolve: async ({ input, ctx }) => {
       console.log('inside tRPC resolver')
-      const res = await ctx.prisma?.post.create({ data: { title: input.title || '' }})
+      const res = await ctx.prisma.post.create({ data: { title: input.title || '' }})
       console.log(res)
       return res
+    }
+  })
+  .mutation("delete", {
+    input: z.object({
+      id: z.number()
+    }),
+    resolve: async ({ input, ctx }) => {
+      const deletedPost = await ctx.prisma.post.delete({
+        where: {
+          id: input.id
+        }
+      })
+      console.log('DELETED POST IS:', deletedPost)
+      return deletedPost
     }
   })
