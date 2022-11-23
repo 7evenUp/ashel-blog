@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Link from "next/link";
 import { trpc } from "../../utils/trpc";
 
 const Blog: NextPage = () => {
@@ -31,10 +32,18 @@ const Blog: NextPage = () => {
       <h1 className="text-[5rem] leading-normal font-extrabold text-white drop-shadow-[0_0_1px_rgb(0,0,0)]">
         Это мой блог
       </h1>
-      <div>
+      <div className="grid grid-cols-2 w-full gap-8">
         {isSuccess && (
           posts.map(post => (
-            <div key={post.id}>{new Date(post.createdAt).toDateString()}</div>
+            <div
+              key={post.id}
+              className="flex flex-col bg-slate-200 rounded-xl p-4"
+            >
+              {new Date(post.createdAt).toDateString()}
+              <Link href={`/blog/${post.id}`}>
+                <a>Read more...</a>
+              </Link>
+            </div>
           ))
         )}
       </div>
