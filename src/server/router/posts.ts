@@ -3,9 +3,18 @@ import { z } from "zod";
 
 export const postsRouter = createRouter()
   .query("getAll", {
-    async resolve({ ctx }) {
+    resolve: async ({ ctx }) => {
       return await ctx.prisma?.post.findMany();
     },
+  })
+  .query("getPublished", {
+    resolve: async ({ ctx }) => {
+      return await ctx.prisma.post.findMany({
+        where: {
+          published: true
+        }
+      })
+    }
   })
   .mutation("create", {
     input: z.object({
