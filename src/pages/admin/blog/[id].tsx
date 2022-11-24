@@ -45,20 +45,54 @@ export const getStaticProps = async (context: GetStaticPropsContext<{id: string}
 }
 
 const Post = ({post, error}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const [title, setTitle] = useState(post?.title || '')
+
   return (
-    <main className="container mx-auto flex flex-col items-center min-h-screen p-4 gap-8">
-      <div className="flex flex-col gap-2">
-        {error && <h1>Error occured!</h1>}
-        
-        {post !== undefined && 
-          <div>
-            <h1>{post.title}</h1>
+    <div className="flex flex-col gap-2">
+      {error && <h1>Error occured!</h1>}
+      
+      {post !== undefined && 
+        <>
+          <FloatButtons />
+          <div className="flex flex-col">
+            <input
+              className="text-5xl outline-none text-center border-b-2"
+              type="text"
+              placeholder="Title of your story"
+              value={title}
+              onChange={(e) => setTitle(e.currentTarget.value)}
+            />
             <span>Created at: {post.createdAt}</span>
           </div>
-        }
-      </div>
-    </main>
+        </>
+      }
+    </div>
   );
 };
+
+const FloatButtons = () => {
+  return (
+    <div className="fixed bottom-8 right-8 flex gap-4">
+      <button
+        className="bg-slate-200 rounded-md py-1 px-2"
+        type="button"
+        onClick={() => {
+          
+        }}
+      >
+        Save
+      </button>
+      <button
+        className="bg-slate-200 rounded-md py-1 px-2"
+        type="button"
+        onClick={() => {
+          
+        }}
+      >
+        Publish
+      </button>
+    </div>
+  )
+}
 
 export default Post;
