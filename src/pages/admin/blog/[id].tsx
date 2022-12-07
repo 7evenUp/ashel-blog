@@ -1,7 +1,9 @@
 import { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import React, { useEffect, useState } from "react";
-import Editor from "./Editor";
+import React, { useEffect, useState, Suspense } from "react";
 import { prisma } from "../../../server/db/client";
+import dynamic from 'next/dynamic'
+
+const DynamicEditor = dynamic(() => import('./Editor'), { suspense: true })
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await prisma.post.findMany({
@@ -71,7 +73,9 @@ const Post = ({post, error}: InferGetStaticPropsType<typeof getStaticProps>) => 
             <span>Created at: {post.createdAt}</span>
 
             <div className="editor-shell">
-              <Editor state={editorState} setState={setEditorState} />
+              <Suspense fallback={`Loading...`}>
+                <DynamicEditor state={editorState} setState={setEditorState} />
+              </Suspense>
             </div>
           </div>
         </>
