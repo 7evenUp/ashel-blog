@@ -13,7 +13,7 @@ const Blog: NextPage = () => {
 
   if (isLoading) {
     return (
-      <h1 className="text-[5rem] leading-normal font-extrabold text-white drop-shadow-[0_0_1px_rgb(0,0,0)]">
+      <h1 className="text-[2rem] leading-normal font-extrabold text-white drop-shadow-[0_0_1px_rgb(0,0,0)]">
         Загрузка постов
       </h1>
     );
@@ -21,7 +21,7 @@ const Blog: NextPage = () => {
 
   if (error) {
     return (
-      <h1 className="text-[5rem] leading-normal font-extrabold text-white drop-shadow-[0_0_1px_rgb(0,0,0)]">
+      <h1 className="text-[2rem] leading-normal font-extrabold text-white drop-shadow-[0_0_1px_rgb(0,0,0)]">
         Ошибка: {error.message}
       </h1>
     );

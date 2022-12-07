@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import React, { useEffect, useState } from "react";
+import Editor from "./Editor";
 import { prisma } from "../../../server/db/client";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -46,6 +47,11 @@ export const getStaticProps = async (context: GetStaticPropsContext<{id: string}
 
 const Post = ({post, error}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [title, setTitle] = useState(post?.title || '')
+  const [editorState, setEditorState] = useState(null);
+
+  const handlePublish = async () => {
+
+  }
 
   return (
     <div className="flex flex-col gap-2">
@@ -63,6 +69,10 @@ const Post = ({post, error}: InferGetStaticPropsType<typeof getStaticProps>) => 
               onChange={(e) => setTitle(e.currentTarget.value)}
             />
             <span>Created at: {post.createdAt}</span>
+
+            <div className="editor-shell">
+              <Editor state={editorState} setState={setEditorState} />
+            </div>
           </div>
         </>
       }
