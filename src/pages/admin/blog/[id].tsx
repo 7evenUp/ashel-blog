@@ -1,67 +1,87 @@
-import { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import React, { useEffect, useState, Suspense } from "react";
+import {
+  GetStaticPaths,
+  GetStaticPropsContext,
+  InferGetStaticPropsType,
+} from "next";
+import React, { useEffect, useState } from "react";
 import { prisma } from "../../../server/db/client";
-import dynamic from 'next/dynamic'
-
-const DynamicEditor = dynamic(() => import('./Editor'), { suspense: true })
+import { trpc } from "../../../utils/trpc";
+import Editor from './Editor'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await prisma.post.findMany({
     select: {
-      id: true
-    }
-  })
+      id: true,
+    },
+  });
 
-  console.log('Hello from getStaticPaths')
+  console.log("Hello from getStaticPaths");
 
   return {
-    paths: posts.map(post => ({ params: { id: `${post.id}` }})),
-    fallback: false
-  }
-}
+    paths: posts.map((post) => ({ params: { id: `${post.id}` } })),
+    fallback: false,
+  };
+};
 
-export const getStaticProps = async (context: GetStaticPropsContext<{id: string}>) => {
+export const getStaticProps = async (
+  context: GetStaticPropsContext<{ id: string }>
+) => {
   if (context.params?.id) {
     const post = await prisma.post.findFirst({
       where: {
-        id: parseInt(context.params?.id)
+        id: parseInt(context.params?.id),
       },
-    })
+    });
 
     if (post !== null) {
       return {
         props: {
           post: {
             ...post,
-            createdAt: new Date(post.createdAt).toDateString()
-          }
+            createdAt: new Date(post.createdAt).toDateString(),
+          },
         },
-      }
+      };
     }
   }
 
   return {
     props: {
-      error: 'Error'
-    }
-  }
-}
+      error: "Error",
+    },
+  };
+};
 
-const Post = ({post, error}: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const [title, setTitle] = useState(post?.title || '')
+const Post = ({
+  post,
+  error,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const [title, setTitle] = useState(post?.title || "");
   const [editorState, setEditorState] = useState(null);
+  const saveMutation = trpc.useMutation("posts.update")
+  const publishMutation = trpc.useMutation("posts.publish")
 
-  const handlePublish = async () => {
-
-  }
+  const handlePublish = async () => {};
 
   return (
     <div className="flex flex-col gap-2">
       {error && <h1>Error occured!</h1>}
-      
-      {post !== undefined && 
+
+      {post !== undefined && (
         <>
-          <FloatButtons />
+          <FloatButtons
+            handlePublish={handlePublish}
+            handleSave={async () => {
+              await saveMutation.mutateAsync({
+                id: post.id,
+                title,
+                desc: 'This is a custom description',
+                content: editorState || ''
+              }, {
+                onSuccess: (data) => { console.log(data) }
+              })
+            }}
+          />
           <div className="flex flex-col">
             <input
               className="text-5xl outline-none text-center border-b-2"
@@ -73,40 +93,40 @@ const Post = ({post, error}: InferGetStaticPropsType<typeof getStaticProps>) => 
             <span>Created at: {post.createdAt}</span>
 
             <div className="editor-shell">
-              <Suspense fallback={`Loading...`}>
-                <DynamicEditor state={editorState} setState={setEditorState} />
-              </Suspense>
+              <Editor state={editorState} setState={setEditorState} />
             </div>
           </div>
         </>
-      }
+      )}
     </div>
   );
 };
 
-const FloatButtons = () => {
+const FloatButtons = ({
+  handlePublish,
+  handleSave,
+}: {
+  handlePublish: () => void;
+  handleSave: () => void;
+}) => {
   return (
     <div className="fixed bottom-8 right-8 flex gap-4">
       <button
         className="bg-slate-200 rounded-md py-1 px-2"
         type="button"
-        onClick={() => {
-          
-        }}
+        onClick={handleSave}
       >
         Save
       </button>
       <button
         className="bg-slate-200 rounded-md py-1 px-2"
         type="button"
-        onClick={() => {
-          
-        }}
+        onClick={handlePublish}
       >
         Publish
       </button>
     </div>
-  )
-}
+  );
+};
 
 export default Post;

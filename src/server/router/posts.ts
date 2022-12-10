@@ -27,6 +27,50 @@ export const postsRouter = createRouter()
       return res
     }
   })
+  .mutation("update", {
+    input: z.object({
+      id: z.number(),
+      title: z.string(),
+      desc: z.string(),
+      content: z.string(),
+    }),
+    resolve: async ({ input, ctx }) => {
+      const res = await ctx.prisma.post.update({
+        where: {
+          id: input.id
+        },
+        data: {
+          title: input.title,
+          content: input.content,
+        }
+      })
+
+      return res
+    }
+  })
+  .mutation("publish", {
+    input: z.object({
+      id: z.number(),
+      title: z.string(),
+      desc: z.string(),
+      content: z.string(),
+    }),
+    resolve: async ({ input, ctx }) => {
+      const res = await ctx.prisma.post.update({
+        where: {
+          id: input.id
+        },
+        data: {
+          title: input.title,
+          content: input.content,
+          published: true,
+          publishedAt: new Date(Date.now())
+        }
+      })
+
+      return res
+    }
+  })
   .mutation("delete", {
     input: z.object({
       id: z.number()

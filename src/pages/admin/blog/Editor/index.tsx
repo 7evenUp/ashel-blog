@@ -83,7 +83,7 @@ export default function Editor({state, setState}): JSX.Element {
           }
         }}
       >
-        Save
+        Save editor state
       </button>
     </LexicalComposer>
   );
