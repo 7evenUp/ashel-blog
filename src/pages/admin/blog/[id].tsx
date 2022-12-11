@@ -38,7 +38,7 @@ export const getStaticProps = async (
         props: {
           post: {
             ...post,
-            createdAt: new Date(post.createdAt).toDateString(),
+            createdAt: new Date(post.createdAt).toLocaleDateString(),
           },
         },
       };
@@ -83,14 +83,17 @@ const Post = ({
             }}
           />
           <div className="flex flex-col">
-            <input
-              className="text-5xl outline-none text-center border-b-2"
-              type="text"
-              placeholder="Title of your story"
-              value={title}
-              onChange={(e) => setTitle(e.currentTarget.value)}
-            />
-            <span>Created at: {post.createdAt}</span>
+            <div>
+              <input
+                className="text-5xl outline-none text-center border-b-2"
+                type="text"
+                placeholder="Title of your story"
+                value={title}
+                onChange={(e) => setTitle(e.currentTarget.value)}
+              />
+              <span>Created at: {post.createdAt}</span>
+            </div>
+            
 
             <div className="editor-shell">
               <Editor state={editorState} setState={setEditorState} />
@@ -110,7 +113,7 @@ const FloatButtons = ({
   handleSave: () => void;
 }) => {
   return (
-    <div className="fixed bottom-8 right-8 flex gap-4">
+    <div className="fixed bottom-8 right-8 flex gap-4 z-50">
       <button
         className="bg-slate-200 rounded-md py-1 px-2"
         type="button"
