@@ -46,7 +46,7 @@ const Blog: NextPage = () => {
           >
             {post.published && <span className="absolute w-3 h-3 rounded-full bg-red-400 top-2 right-4"/>}
             <span>{post.id}: {post.title}</span>
-            <span>{new Date(post.createdAt).toDateString()}</span>
+            <span>{new Date(post.createdAt).toLocaleDateString()}</span>
             <div className="flex gap-6 justify-between">
               <Link href={`/admin/blog/${post.id}`}>
                 <a className="w-1/2 rounded-md bg-slate-50 hover:bg-slate-300 transition-all py-1 text-center">edit</a>

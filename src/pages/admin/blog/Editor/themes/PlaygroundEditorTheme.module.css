@@ -33,8 +33,7 @@
 }
 .PlaygroundEditorTheme__h1 {
   font-size: 24px;
-  color: rgb(5, 5, 5);
-  font-weight: 400;
+  font-weight: 600;
   margin: 0;
   margin-bottom: 12px;
   padding: 0;
@@ -42,7 +41,7 @@
 .PlaygroundEditorTheme__h2 {
   font-size: 20px;
   color: rgb(101, 103, 107);
-  font-weight: 700;
+  font-weight: 400;
   margin: 0;
   margin-top: 10px;
   padding: 0;
@@ -53,7 +52,6 @@
   margin: 0;
   margin-top: 10px;
   padding: 0;
-  text-transform: uppercase;
 }
 .PlaygroundEditorTheme__textBold {
   font-weight: bold;

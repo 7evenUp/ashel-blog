@@ -41,6 +41,7 @@ export const postsRouter = createRouter()
         },
         data: {
           title: input.title,
+          desc: input.desc,
           content: input.content,
         }
       })
@@ -61,6 +62,7 @@ export const postsRouter = createRouter()
           id: input.id
         },
         data: {
+          desc: input.desc,
           title: input.title,
           content: input.content,
           published: true,

@@ -29,7 +29,7 @@ export default function Editor({state, setState}): JSX.Element {
   const editorStateRef = useRef();
 
   const initialConfig = {
-    editorState: undefined,
+    editorState: state || undefined,
     namespace: "Playground",
     nodes: [...PlaygroundNodes],
     onError: (error: Error) => {
@@ -67,7 +67,6 @@ export default function Editor({state, setState}): JSX.Element {
           <LinkPlugin />
           <ClickableLinkPlugin />
           <HorizontalRulePlugin />
-          {/* @ts-ignore */}
           <OnChangePlugin
             onChange={(editorState) => (editorStateRef.current = editorState)}
           />

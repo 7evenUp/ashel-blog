@@ -57,7 +57,7 @@ const Post = ({
   error,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [title, setTitle] = useState(post?.title || "");
-  const [editorState, setEditorState] = useState(null);
+  const [editorState, setEditorState] = useState(post?.content);
   const saveMutation = trpc.useMutation("posts.update")
   const publishMutation = trpc.useMutation("posts.publish")
 
