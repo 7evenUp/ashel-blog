@@ -61,8 +61,6 @@ const Post = ({
   const saveMutation = trpc.useMutation("posts.update")
   const publishMutation = trpc.useMutation("posts.publish")
 
-  const handlePublish = async () => {};
-
   return (
     <div className="flex flex-col gap-2">
       {error && <h1>Error occured!</h1>}
@@ -70,7 +68,16 @@ const Post = ({
       {post !== undefined && (
         <>
           <FloatButtons
-            handlePublish={handlePublish}
+            handlePublish={async () => {
+              await publishMutation.mutateAsync({
+                id: post.id,
+                title,
+                desc: 'This is description for published posts',
+                content: editorState || ''
+              }, {
+                onSuccess: data => console.log(data)
+              })
+            }}
             handleSave={async () => {
               await saveMutation.mutateAsync({
                 id: post.id,
