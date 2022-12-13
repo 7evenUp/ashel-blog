@@ -39,7 +39,8 @@ const Blog: NextPage = () => {
               key={post.id}
               className="flex flex-col bg-slate-200 rounded-xl p-4"
             >
-              {new Date(post.createdAt).toDateString()}
+              <span className="text-3xl">{post.title}</span>
+              {new Date(post.createdAt).toLocaleDateString()}
               <Link href={`/blog/${post.id}`}>
                 <a>Read more...</a>
               </Link>

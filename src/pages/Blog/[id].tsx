@@ -1,6 +1,7 @@
 import { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import React, { useEffect, useState } from "react";
 import { prisma } from "../../server/db/client";
+import EditorStateView from "./EditorStateView";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await prisma.post.findMany({
@@ -28,12 +29,13 @@ export const getStaticProps = async (context: GetStaticPropsContext<{id: string}
       },
     })
 
-    if (post !== null) {
+    if (post !== null && post.publishedAt) {
       return {
         props: {
           post: {
             ...post,
-            createdAt: new Date(post.createdAt).toDateString()
+            publishedAt: new Date(post.publishedAt).toLocaleDateString(),
+            createdAt: new Date(post.createdAt).toLocaleDateString()
           }
         },
       }
@@ -49,18 +51,20 @@ export const getStaticProps = async (context: GetStaticPropsContext<{id: string}
 
 const Post = ({post, error}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <main className="container mx-auto flex flex-col items-center min-h-screen p-4 gap-8">
-      <div className="flex flex-col gap-2">
-        {error && <h1>Error occured!</h1>}
-        
-        {post !== undefined && 
+    <div className="flex flex-col gap-2 w-full">
+      {error && <h1>Error occured!</h1>}
+      
+      {post !== undefined && 
+        <>
           <div>
-            <h1>{post.title}</h1>
-            <span>Created at: {post.createdAt}</span>
+            <h1 className="text-5xl">{post.title}</h1>
+            <p>Description: {post.desc}</p>
+            <span>Published at: {post.publishedAt}</span>
           </div>
-        }
-      </div>
-    </main>
+          <EditorStateView data={post.content} />
+        </>
+      }
+    </div>
   );
 };
 
