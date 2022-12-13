@@ -45,7 +45,9 @@ const Blog: NextPage = () => {
             className="flex flex-col gap-4 bg-slate-200 rounded-xl py-2 px-4 relative"
           >
             {post.published && <span className="absolute w-3 h-3 rounded-full bg-red-400 top-2 right-4"/>}
-            <span>{post.id}: {post.title}</span>
+            <span className="font-bold text-2xl">{post.title}</span>
+            <span>PostID: {post.id}</span>
+            <p>Description: {post.desc}</p>
             <span>{new Date(post.createdAt).toLocaleDateString()}</span>
             <div className="flex gap-6 justify-between">
               <Link href={`/admin/blog/${post.id}`}>
