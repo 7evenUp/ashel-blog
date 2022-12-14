@@ -33,12 +33,12 @@ export const getStaticProps = async (
       },
     });
 
-    if (post !== null && post.publishedAt) {
+    if (post !== null) {
       return {
         props: {
           post: {
             ...post,
-            publishedAt: new Date(post.publishedAt).toLocaleDateString(),
+            publishedAt: post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : null,
             createdAt: new Date(post.createdAt).toLocaleDateString(),
           },
         },

@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { trpc } from "../../utils/trpc";
+import Post from "./components/Post";
 
 const Blog: NextPage = () => {
   const x = trpc.useQuery(["example.hello"]);
@@ -29,24 +30,8 @@ const Blog: NextPage = () => {
 
   return (
     <>
-      <h1 className="text-[5rem] leading-normal font-extrabold text-white drop-shadow-[0_0_1px_rgb(0,0,0)]">
-        Это мой блог
-      </h1>
       <div className="grid grid-cols-2 w-full gap-8">
-        {isSuccess && (
-          posts.map(post => (
-            <div
-              key={post.id}
-              className="flex flex-col bg-slate-200 rounded-xl p-4"
-            >
-              <span className="text-3xl">{post.title}</span>
-              {new Date(post.createdAt).toLocaleDateString()}
-              <Link href={`/blog/${post.id}`}>
-                <a>Read more...</a>
-              </Link>
-            </div>
-          ))
-        )}
+        { isSuccess && posts.map(post => <Post key={post.id} post={post} />) }
       </div>
     </>
   );

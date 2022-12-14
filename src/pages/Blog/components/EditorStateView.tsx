@@ -6,7 +6,7 @@ import {
   PostImageType,
   TextNodeType,
   PostListType,
-} from "./types";
+} from "../types";
 
 const EditorStateView = ({ data }) => {
   if (!data) return null;

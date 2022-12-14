@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import React, { useEffect, useState } from "react";
 import { prisma } from "../../server/db/client";
-import EditorStateView from "./EditorStateView";
+import EditorStateView from "./components/EditorStateView";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await prisma.post.findMany({
@@ -29,6 +29,8 @@ export const getStaticProps = async (context: GetStaticPropsContext<{id: string}
       },
     })
 
+    console.log('FINDING POST', post)
+
     if (post !== null && post.publishedAt) {
       return {
         props: {
@@ -52,7 +54,7 @@ export const getStaticProps = async (context: GetStaticPropsContext<{id: string}
 const Post = ({post, error}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div className="flex flex-col gap-2 w-full">
-      {error && <h1>Error occured!</h1>}
+      {error && <h1>Error occured here!</h1>}
       
       {post !== undefined && 
         <>
