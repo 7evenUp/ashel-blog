@@ -3,11 +3,8 @@ import Head from "next/head";
 import React from "react";
 import { AboutItem, Contacts } from "../components";
 import { aboutData } from "../utils/AboutData";
-import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
-  const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
-
   return (
     <>
       <Head>
@@ -21,7 +18,7 @@ const Home: NextPage = () => {
 
       <h1
         className="self-end text-end sm:text-lg relative mt-16 mb-40 max-w-[413px]
-        before:w-3 before:h-full before:absolute before:bg-slate-200 before:top-0 before:-left-3 sm:before:-left-8
+        before:w-3 before:h-full before:absolute before:bg-beige before:top-0 before:-left-3 sm:before:-left-8
       "
       >
         Меня зовут Артём. Мне 21 год. Любитель выпить. Дипломированный
@@ -39,10 +36,6 @@ const Home: NextPage = () => {
             );
           return <AboutItem key={i} {...aboutItem} />;
         })}
-      </div>
-
-      <div className="pt-6 text-2xl text-blue-500 flex justify-center items-center w-full">
-        {hello.data ? <p>{hello.data.greeting}</p> : <p>Loading..</p>}
       </div>
     </>
   );
