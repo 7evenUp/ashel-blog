@@ -33,7 +33,7 @@ const Blog: NextPage = () => {
         </h1>
         <button
           type="button"
-          className="py-1 px-2 bg-slate-300 rounded-md ml-auto"
+          className="py-1 px-2 bg-beige rounded-md ml-auto"
           onClick={handleCreate}
         >{createMutation.isLoading ? "Creating new post..." : "Create post"}</button>
       </div>
@@ -42,7 +42,7 @@ const Blog: NextPage = () => {
         {posts && posts.map((post) => (
           <div
             key={post.id}
-            className="flex flex-col gap-4 bg-slate-200 rounded-xl py-2 px-4 relative"
+            className="flex flex-col gap-4 bg-beige rounded-xl py-2 px-4 relative"
           >
             {post.published && <span className="absolute w-3 h-3 rounded-full bg-red-400 top-2 right-4"/>}
             <span className="font-bold text-2xl">{post.title}</span>
@@ -51,11 +51,11 @@ const Blog: NextPage = () => {
             <span>{new Date(post.createdAt).toLocaleDateString()}</span>
             <div className="flex gap-6 justify-between">
               <Link href={`/admin/blog/${post.id}`}>
-                <a className="w-1/2 rounded-md bg-slate-50 hover:bg-slate-300 transition-all py-1 text-center">edit</a>
+                <a className="w-1/2 rounded-md bg-white hover:bg-black hover:text-white transition-all py-1 text-center">edit</a>
               </Link>
               <button
                 onClick={() => handleDelete(post.id)}
-                className="w-1/2 rounded-md bg-slate-50 hover:bg-slate-300 transition-all py-1"
+                className="w-1/2 rounded-md bg-white hover:bg-black hover:text-white transition-all py-1"
               >delete</button>
             </div>
           </div>
