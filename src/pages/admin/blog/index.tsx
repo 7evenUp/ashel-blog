@@ -28,7 +28,7 @@ const Blog: NextPage = () => {
   return (
     <>
       <div className="flex items-center gap-16 justify-start w-full">
-        <h1 className="text-[5rem] leading-normal font-extrabold text-white drop-shadow-[0_0_1px_rgb(0,0,0)]">
+        <h1 className="text-5xl leading-normal font-extrabold text-white drop-shadow-[0_0_1px_rgb(0,0,0)]">
           Редактор блога
         </h1>
         <button
@@ -48,7 +48,8 @@ const Blog: NextPage = () => {
             <span className="font-bold text-2xl">{post.title}</span>
             <span>PostID: {post.id}</span>
             <p>Description: {post.desc}</p>
-            <span>{new Date(post.createdAt).toLocaleDateString()}</span>
+            <span>Created: {new Date(post.createdAt).toLocaleDateString()}</span>
+            {post.publishedAt && <span>Published: {new Date(post.publishedAt).toLocaleDateString()}</span>}
             <div className="flex gap-6 justify-between">
               <Link href={`/admin/blog/${post.id}`}>
                 <a className="w-1/2 rounded-md bg-white hover:bg-black hover:text-white transition-all py-1 text-center">edit</a>
