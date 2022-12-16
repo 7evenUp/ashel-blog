@@ -7,6 +7,9 @@ module.exports = {
         white: '#F0EDE8',
         black: '#28282D',
         beige: '#DCD4D1'
+      },
+      screens: {
+        'mobile': '480px'
       }
     },
   },
