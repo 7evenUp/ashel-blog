@@ -3,9 +3,11 @@ import {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { prisma } from "../../../server/db/client";
 import { trpc } from "../../../utils/trpc";
+import FloatButtons from "./components/FloatButtons";
+import Modal from "./components/Modal";
 import Editor from './Editor'
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -14,8 +16,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
       id: true,
     },
   });
-
-  console.log("Hello from getStaticPaths");
 
   return {
     paths: posts.map((post) => ({ params: { id: `${post.id}` } })),
@@ -58,9 +58,13 @@ const Post = ({
   error,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [title, setTitle] = useState(post?.title || "");
-  const [editorState, setEditorState] = useState(post?.content);
+  const [description, setDescription] = useState(post?.desc || "")
+  const [editorState, setEditorState] = useState(post?.content || "");
+  const [modalOpened, setModalOpened] = useState(false)
   const saveMutation = trpc.useMutation("posts.update")
   const publishMutation = trpc.useMutation("posts.publish")
+
+  const changeModalStatus = () => setModalOpened(!modalOpened)
 
   return (
     <div className="flex flex-col gap-2">
@@ -68,7 +72,9 @@ const Post = ({
 
       {post !== undefined && (
         <>
+          <Modal />
           <FloatButtons
+            states={{ title, desc: description, content: editorState }}
             handlePublish={async () => {
               await publishMutation.mutateAsync({
                 id: post.id,
@@ -91,51 +97,34 @@ const Post = ({
             }}
           />
           <div className="flex flex-col">
-            <div>
+            <div className="flex items-end">
+              <span>Created at: {post.createdAt}</span>
               <input
-                className="text-5xl outline-none text-center border-b-2"
+                className="text-5xl outline-none text-center border-b-2 bg-white text-black placeholder:text-beige pb-2"
                 type="text"
                 placeholder="Title of your story"
                 value={title}
                 onChange={(e) => setTitle(e.currentTarget.value)}
               />
-              <span>Created at: {post.createdAt}</span>
+              
+              <button
+                className="ml-auto hover:bg-beige transition-all rounded-lg p-1"
+                type="button"
+                onClick={changeModalStatus}
+              >
+                <svg className="w-8 h-8 fill-black" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.4999 25H14.9999V18.3333H12.4999V20.4167H9.99992V22.9167H12.4999V25ZM16.6666 22.9167H29.9999V20.4167H16.6666V22.9167ZM24.9999 18.3333H27.4999V16.25H29.9999V13.75H27.4999V11.6667H24.9999V18.3333ZM9.99992 16.25H23.3333V13.75H9.99992V16.25ZM13.3333 35V31.6667H6.66659C5.74992 31.6667 4.96547 31.3406 4.31325 30.6883C3.65992 30.035 3.33325 29.25 3.33325 28.3333V8.33333C3.33325 7.41667 3.65992 6.63167 4.31325 5.97833C4.96547 5.32611 5.74992 5 6.66659 5H33.3333C34.2499 5 35.0349 5.32611 35.6883 5.97833C36.3405 6.63167 36.6666 7.41667 36.6666 8.33333V28.3333C36.6666 29.25 36.3405 30.035 35.6883 30.6883C35.0349 31.3406 34.2499 31.6667 33.3333 31.6667H26.6666V35H13.3333ZM6.66659 28.3333H33.3333V8.33333H6.66659V28.3333ZM6.66659 28.3333V8.33333V28.3333Z" />
+                </svg>
+              </button>
+              
             </div>
             
-
             <div className="editor-shell">
               <Editor state={editorState} setState={setEditorState} />
             </div>
           </div>
         </>
       )}
-    </div>
-  );
-};
-
-const FloatButtons = ({
-  handlePublish,
-  handleSave,
-}: {
-  handlePublish: () => void;
-  handleSave: () => void;
-}) => {
-  return (
-    <div className="fixed bottom-8 right-8 flex gap-4 z-50">
-      <button
-        className="bg-slate-200 rounded-md py-1 px-2"
-        type="button"
-        onClick={handleSave}
-      >
-        Save
-      </button>
-      <button
-        className="bg-slate-200 rounded-md py-1 px-2"
-        type="button"
-        onClick={handlePublish}
-      >
-        Publish
-      </button>
     </div>
   );
 };

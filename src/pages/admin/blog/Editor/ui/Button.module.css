@@ -1,13 +1,4 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- *
- */
-
- .Button__root {
+.Button__root {
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 15px;
@@ -18,9 +9,11 @@
   cursor: pointer;
   font-size: 14px;
 }
+
 .Button__root:hover {
   background-color: #ddd;
 }
+
 .Button__small {
   padding-top: 5px;
   padding-bottom: 5px;
@@ -28,9 +21,11 @@
   padding-right: 10px;
   font-size: 13px;
 }
+
 .Button__disabled {
   cursor: not-allowed;
 }
+
 .Button__disabled:hover {
   background-color: #eee;
 }

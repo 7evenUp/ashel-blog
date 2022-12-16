@@ -23,7 +23,7 @@ import PlaygroundEditorTheme from "./themes/PlaygroundEditorTheme";
 import PlaygroundNodes from "./nodes/PlaygroundNodes";
 
 export default function Editor({state, setState}): JSX.Element {
-  const text = "Enter some plain text...";
+  const text = "Начни творить...";
   const placeholder = <Placeholder>{text}</Placeholder>;
   const scrollRef = useRef(null);
   const editorStateRef = useRef();
@@ -57,8 +57,6 @@ export default function Editor({state, setState}): JSX.Element {
               </div>
             }
             placeholder={placeholder}
-            // TODO Collab support until 0.4
-            initialEditorState={undefined}
           />
           <CodeHighlightPlugin />
           <ListPlugin />
@@ -73,7 +71,7 @@ export default function Editor({state, setState}): JSX.Element {
         </>
       </div>
       <button
-        className="border rounded-md text-lg py-1 px-3 hover:bg-cyan-600 duration-200 hover:text-white"
+        className="bg-beige text-black rounded-md text-lg py-1 px-3 hover:bg-black duration-200 hover:text-white"
         onClick={() => {
           if (editorStateRef.current) {
             const json = JSON.stringify(editorStateRef.current);
