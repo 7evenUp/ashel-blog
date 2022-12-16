@@ -30,7 +30,7 @@ const Blog: NextPage = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-20 mt-16">
+      <div className="flex flex-col gap-24 mt-16 w-full">
         { isSuccess && posts.map(post => <Post key={post.id} post={post} />) }
       </div>
     </>
