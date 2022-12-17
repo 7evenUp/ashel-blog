@@ -116,7 +116,7 @@ const Post = ({
               {
                 id: post.id,
                 title,
-                desc: "This is description for published posts",
+                desc: description,
                 content: editorState || "",
               },
               {
@@ -129,7 +129,7 @@ const Post = ({
               {
                 id: post.id,
                 title,
-                desc: "This is a custom description",
+                desc: description,
                 content: editorState || "",
               },
               {
