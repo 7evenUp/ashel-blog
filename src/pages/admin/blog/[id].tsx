@@ -78,7 +78,7 @@ const Post = ({
             <div className="flex items-end">
               <span>Created at: {post.createdAt}</span>
               <input
-                className="text-5xl outline-none text-center border-b-2 bg-white text-black placeholder:text-beige pb-2"
+                className="text-3xl w-full outline-none text-center border-b-2 bg-white text-black placeholder:text-beige pb-2"
                 type="text"
                 placeholder="Title of your story"
                 value={title}
@@ -86,7 +86,7 @@ const Post = ({
               />
 
               <button
-                className="ml-auto hover:bg-beige transition-all rounded-lg p-1"
+                className="hover:bg-beige transition-all rounded-lg p-1"
                 type="button"
                 onClick={changeModalStatus}
               >
