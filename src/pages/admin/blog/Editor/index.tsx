@@ -23,6 +23,7 @@ import PlaygroundEditorTheme from "./themes/PlaygroundEditorTheme";
 import PlaygroundNodes from "./nodes/PlaygroundNodes";
 
 export default function Editor({state, setState}): JSX.Element {
+  const [timer, setTimer] = React.useState()
   const text = "Начни творить...";
   const placeholder = <Placeholder>{text}</Placeholder>;
   const scrollRef = useRef(null);
@@ -66,22 +67,20 @@ export default function Editor({state, setState}): JSX.Element {
           <ClickableLinkPlugin />
           <HorizontalRulePlugin />
           <OnChangePlugin
-            onChange={(editorState) => (editorStateRef.current = editorState)}
+            onChange={(editorState) => {
+              const json = JSON.stringify(editorState);
+              clearTimeout(timer)
+
+              const newTimer = setTimeout(() => {
+                setState(json)
+                console.log(json)
+              }, 500)
+
+              setTimer(newTimer)
+            }}
           />
         </>
       </div>
-      <button
-        className="bg-beige text-black rounded-md text-lg py-1 px-3 hover:bg-black duration-200 hover:text-white"
-        onClick={() => {
-          if (editorStateRef.current) {
-            const json = JSON.stringify(editorStateRef.current);
-            setState(json)
-            console.log(json);
-          }
-        }}
-      >
-        Save editor state
-      </button>
     </LexicalComposer>
   );
 }
