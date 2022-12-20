@@ -12,7 +12,7 @@ const EditorStateView = ({ data }) => {
   if (!data) return null;
 
   return (
-    <div className="flex flex-col gap-1 border rounded-lg w-full">
+    <div className="flex flex-col gap-1 border rounded-lg w-full text-lg leading-relaxed">
       {
         // @ts-ignore
         JSON.parse(data).root.children.map(renderData)
@@ -26,11 +26,11 @@ export default EditorStateView;
 const renderData = (rootElement: PostDataType, key: number) => {
   if (rootElement.type === "heading") {
     if (rootElement.tag === "h1")
-      return <h1 className="text-2xl">{rootElement.children[0]?.text}</h1>;
+      return <h1 className="text-2xl font-medium">{rootElement.children[0]?.text}</h1>;
     else if (rootElement.tag === "h2")
-      return <h2 className="text-xl">{rootElement.children[0]?.text}</h2>;
+      return <h2 className="text-xl font-medium">{rootElement.children[0]?.text}</h2>;
     else if (rootElement.tag === "h3")
-      return <h3 className="text-lg">{rootElement.children[0]?.text}</h3>;
+      return <h3 className="text-lg font-medium">{rootElement.children[0]?.text}</h3>;
   } else if (rootElement.type === "paragraph")
     return renderParagraph(rootElement);
   else if (rootElement.type === "list") return renderList(rootElement);
@@ -148,7 +148,7 @@ const renderList = (rootElement: PostListType) => {
 
 const renderBlockquote = (rootElement) => {
   return (
-    <div className="border-l border-slate-700 bg-slate-300 ml-4 pl-2">
+    <div className="border-l-4 border-beige text-beige-dark ml-4 pl-2">
       {rootElement.children.map(renderParagraphChildren)}
     </div>
   );

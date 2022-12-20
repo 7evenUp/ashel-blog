@@ -27,7 +27,6 @@ export default function Editor({state, setState}): JSX.Element {
   const text = "Начни творить...";
   const placeholder = <Placeholder>{text}</Placeholder>;
   const scrollRef = useRef(null);
-  const editorStateRef = useRef();
 
   const initialConfig = {
     editorState: state || undefined,
@@ -73,7 +72,6 @@ export default function Editor({state, setState}): JSX.Element {
 
               const newTimer = setTimeout(() => {
                 setState(json)
-                console.log(json)
               }, 500)
 
               setTimer(newTimer)
