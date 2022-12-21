@@ -12,7 +12,7 @@ const EditorStateView = ({ data }) => {
   if (!data) return null;
 
   return (
-    <div className="flex flex-col gap-1 border rounded-lg w-full text-lg leading-relaxed">
+    <div className="flex flex-col gap-1 border rounded-lg w-full text-lg leading-relaxed xl:max-w-[1000px]">
       {
         // @ts-ignore
         JSON.parse(data).root.children.map(renderData)

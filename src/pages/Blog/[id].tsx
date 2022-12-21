@@ -53,7 +53,7 @@ export const getStaticProps = async (context: GetStaticPropsContext<{id: string}
 
 const Post = ({post, error}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <div className="flex flex-col gap-2 w-full">
+    <div className="flex flex-col gap-2 w-full xl:items-center">
       {error && <h1>Error occured here!</h1>}
       
       {post !== undefined && 
