@@ -49,6 +49,24 @@ export const postsRouter = createRouter()
       return res
     }
   })
+  .mutation("update_path", {
+    input: z.object({
+      id: z.number(),
+      path: z.string()
+    }),
+    resolve: async ({ input, ctx }) => {
+      const res = await ctx.prisma.post.update({
+        where: {
+          id: input.id
+        },
+        data: {
+          image: input.path
+        }
+      })
+
+      return res
+    }
+  })
   .mutation("publish", {
     input: z.object({
       id: z.number(),

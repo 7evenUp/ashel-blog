@@ -12,7 +12,7 @@ const EditorStateView = ({ data }) => {
   if (!data) return null;
 
   return (
-    <div className="flex flex-col gap-1 border rounded-lg w-full text-lg leading-relaxed xl:max-w-[1000px]">
+    <div className="flex flex-col w-full text-lg leading-relaxed xl:max-w-[1000px]">
       {
         // @ts-ignore
         JSON.parse(data).root.children.map(renderData)
@@ -26,11 +26,11 @@ export default EditorStateView;
 const renderData = (rootElement: PostDataType, key: number) => {
   if (rootElement.type === "heading") {
     if (rootElement.tag === "h1")
-      return <h1 className="text-2xl font-medium">{rootElement.children[0]?.text}</h1>;
+      return <h2 className="text-2xl font-medium mb-4 mt-6">{rootElement.children[0]?.text}</h2>;
     else if (rootElement.tag === "h2")
-      return <h2 className="text-xl font-medium">{rootElement.children[0]?.text}</h2>;
+      return <h3 className="text-xl font-medium mb-2 mt-4">{rootElement.children[0]?.text}</h3>;
     else if (rootElement.tag === "h3")
-      return <h3 className="text-lg font-medium">{rootElement.children[0]?.text}</h3>;
+      return <h3 className="text-lg font-medium mb-2 mt-4">{rootElement.children[0]?.text}</h3>;
   } else if (rootElement.type === "paragraph")
     return renderParagraph(rootElement);
   else if (rootElement.type === "list") return renderList(rootElement);
@@ -46,7 +46,7 @@ const renderParagraph = (rootElement: PostDataType) => {
     return renderImage(rootElement.children[0]);
   else if (rootElement.format === "left")
     return (
-      <p className="text-left">
+      <p className="text-left my-1">
         {rootElement.children.map(renderParagraphChildren)}
       </p>
     );
@@ -62,7 +62,7 @@ const renderParagraph = (rootElement: PostDataType) => {
         {rootElement.children.map(renderParagraphChildren)}
       </p>
     );
-  return <p>{rootElement.children.map(renderParagraphChildren)}</p>;
+  return <p className="my-1">{rootElement.children.map(renderParagraphChildren)}</p>;
 };
 
 const renderParagraphChildren = (
