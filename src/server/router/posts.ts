@@ -9,11 +9,14 @@ export const postsRouter = createRouter()
   })
   .query("getPublished", {
     resolve: async ({ ctx }) => {
-      return await ctx.prisma.post.findMany({
+      const published = await ctx.prisma.post.findMany({
         where: {
           published: true
         }
       })
+      // @ts-ignore
+      const sorted = published.sort((a, b) => b.publishedAt?.getTime() - a.publishedAt?.getTime())
+      return sorted
     }
   })
   .mutation("create", {
