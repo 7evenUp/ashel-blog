@@ -1,14 +1,35 @@
 import { Post } from '@prisma/client'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { supabase } from '../../../supabase/supabaseClient'
 
 const Post = ({ post }: { post: Post }) => {
+  const [photoUrl, setPhotoUrl] = useState("")
+
+  const downloadImage = async (path: string) => {
+    try {
+      const { data, error } = await supabase.storage
+        .from('photos')
+        .download(path)
+
+      if (error) throw error
+
+      const url = URL.createObjectURL(data)
+      setPhotoUrl(url)
+    } catch (error) {
+      console.error('Error downloading image: ', error)
+    }
+  }
+
+  useEffect(() => {
+    if (post.image) downloadImage(post.image)
+  }, [])
+  
   return (
     <Link href={`/blog/${post.id}`}>
-      <a className="group flex gap-4 lg:gap-8 flex-col-reverse lg:flex-row border-b pb-8 hover:border-black transition-all w-full">
+      <a className="group flex gap-4 lg:gap-8 flex-col-reverse lg:flex-row border-b pb-8 hover:border-black duration-500 w-full">
         <div className="basis-1/2 flex flex-col">
-          {/* <h3 className="text-2xl mobile:text-3xl sm:text-4xl md:text-5xl font-serif tracking-wider">Rust - лучший язык программирования?</h3> */}
           <h3 className="text-2xl mobile:text-3xl sm:text-4xl md:text-5xl font-serif tracking-wider">{post.title}</h3>
           <div className="flex gap-2 items-center mt-2 mb-4">
             <svg className="w-[14px] h-[14px]" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
@@ -23,13 +44,12 @@ const Post = ({ post }: { post: Post }) => {
             </span>
           </div>
           <p className="text-lg leading-relaxed">{post.desc}</p>
-          {/* <p className="text-lg leading-relaxed">Тут я говорю о том, как я учил Rust, как сильно мне понравился процесс обучения, с какими подводными камнями встретился, узнал, что есть компилируемые языки программирования и многое другое</p> */}
         </div>
         
         <div className="lg:basis-1/2 w-full lg:w-1/2 min-h-[236px] sm:h-[300px] relative ">
           <Image
-            className="object-cover grayscale group-hover:grayscale-0 transition-all"
-            src={'https://ntorzmsgnfxlxdfetvfz.supabase.co/storage/v1/object/sign/photos/posts/post.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJwaG90b3MvcG9zdHMvcG9zdC5qcGciLCJ0cmFuc2Zvcm1hdGlvbnMiOiIiLCJpYXQiOjE2NzExMDc4MTMsImV4cCI6MTk4NjQ2NzgxM30.IgIe406AXkxusF1R3b9yf9aaTopMfhaZBIV-uJnzkMQ'}
+            className="object-cover grayscale group-hover:grayscale-0 duration-300"
+            src={photoUrl}
             alt="Avatar"
             layout='fill'
           />

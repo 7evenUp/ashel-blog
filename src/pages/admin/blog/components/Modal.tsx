@@ -16,7 +16,7 @@ const Modal = ({
   const pathMutation = trpc.useMutation('posts.update_path')
   const onSelectFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) return;
-    const file = e.target.files[0];
+    const file = e.target.files[0]; 
 
     if (file === undefined) return;
 
