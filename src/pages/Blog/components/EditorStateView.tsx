@@ -12,7 +12,7 @@ const EditorStateView = ({ data }) => {
   if (!data) return null;
 
   return (
-    <div className="flex flex-col w-full text-lg leading-relaxed xl:max-w-[1000px]">
+    <div className="flex flex-col w-full text-sm mobile:text-lg leading-relaxed xl:max-w-[1000px]">
       {
         // @ts-ignore
         JSON.parse(data).root.children.map(renderData)
@@ -37,7 +37,11 @@ const renderData = (rootElement: PostDataType, key: number) => {
   else if (rootElement.type === "quote") return renderBlockquote(rootElement);
   else if (rootElement.type === "code") return renderCode(rootElement);
   else if (rootElement.type === "horizontalrule")
-    return <div className="w-full h-px my-8 bg-slate-400"></div>;
+    return (
+      <div className="w-full my-8 flex justify-center gap-3">
+        {new Array(5).fill(null).map(() => (<span className="w-1 h-1 rounded-full bg-grey" />))}
+      </div>
+    )
   else return <span>Not heading</span>;
 };
 
@@ -148,7 +152,7 @@ const renderList = (rootElement: PostListType) => {
 
 const renderBlockquote = (rootElement) => {
   return (
-    <div className="border-l-4 border-beige text-beige-dark ml-4 pl-2">
+    <div className="border-l-4 border-grey text-grey ml-4 pl-2 my-4">
       {rootElement.children.map(renderParagraphChildren)}
     </div>
   );
