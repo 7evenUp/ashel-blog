@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import Link from "next/link";
 import { trpc } from "../../utils/trpc";
 import Post from "./components/Post";
 

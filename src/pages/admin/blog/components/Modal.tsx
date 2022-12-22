@@ -1,3 +1,4 @@
+import { Post } from "@prisma/client";
 import React, { Dispatch, SetStateAction } from "react";
 import { supabase } from "../../../../supabase/supabaseClient";
 import { trpc } from "../../../../utils/trpc";
@@ -6,12 +7,12 @@ const Modal = ({
   state,
   setState,
   close,
-  postId
+  post
 }: {
   state: string;
   setState: Dispatch<SetStateAction<string>>;
   close: () => void
-  postId: number
+  post: Post
 }) => {
   const pathMutation = trpc.useMutation('posts.update_path')
   const onSelectFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,44 +22,29 @@ const Modal = ({
     if (file === undefined) return;
 
     if (file.type && file.type.startsWith("image/")) {
-      // const reader = new FileReader()
+      if (post.image) {
+        const { data, error } = await supabase.storage.from('photos').remove([post.image])
+        if (error) console.error(error)
+      }
 
-      // reader.addEventListener('load', () => {
-      //   console.log(reader.result)
-      // })
       const folderName = 'posts'
-      const fileExt = file.name.split(".").pop();
-      const filePath = `${folderName}/121.${fileExt}`;
+      const [fileName, fileExt] = file.name.split(".");
+      const filePath = `${folderName}/${fileName}.${fileExt}`;
 
       const { data: uploadData, error } = await supabase.storage
         .from("photos")
         .upload(filePath, file);
 
-      // const
-
       if (error) console.error(error);
       else {
         console.log(uploadData)
         await pathMutation.mutateAsync({
-          id: postId,
+          id: post.id,
           path: uploadData.path
         }, {
           onSuccess: data => console.log('Success: ', data)
         })
-        // const { data, error } = await supabase
-        //   .from("Photo")
-        //   .insert([
-        //     { title: "title", desc: "description", src: uploadData.path },
-        //   ])
-        //   .select("id")
-        //   .single();
-
-        // if (error) console.error(error);
-
-        // console.log(data);
       }
-
-      // reader.readAsDataURL(file)
     }
   };
 

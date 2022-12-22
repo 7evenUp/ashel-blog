@@ -105,7 +105,7 @@ const Post = ({
         </div>
       )}
 
-      {isModalOpened && <Modal postId={post?.id} state={description} setState={setDescription} close={changeModalStatus} />}
+      {isModalOpened && <Modal post={post} state={description} setState={setDescription} close={changeModalStatus} />}
 
       {post !== undefined && (
         <FloatButtons
