@@ -6,19 +6,21 @@ import { supabase } from "../../../supabase/supabaseClient";
 
 const Post = ({ post }: { post: Post }) => {
   const [url, setUrl] = useState("");
-  const fetchImg = async () => {
-    if (post.image) {
-      const { data, error } = await supabase.storage
-        .from("photos")
-        .download(post.image);
-      if (error) console.error(error);
-      // @ts-ignore
-      const url = URL.createObjectURL(data);
-      setUrl(url);
-    }
-  };
 
   useEffect(() => {
+    const fetchImg = async () => {
+      if (post.image) {
+        const { data, error } = await supabase.storage
+          .from("photos")
+          .download(post.image);
+        if (error) console.error(error);
+        if (data) {
+          const url = URL.createObjectURL(data);
+          setUrl(url);
+        }
+      }
+    };
+
     fetchImg();
   }, []);
 
@@ -39,10 +41,8 @@ const Post = ({ post }: { post: Post }) => {
               <path d="M7.25 4H6V7.93443L10.375 10L11 9.19344L7.25 7.44262V4Z" />
             </svg>
             <span className="text-sm">
-              {
-                // @ts-ignore
-                new Date(post.publishedAt).toLocaleDateString()
-              }
+              {post.publishedAt &&
+                new Date(post.publishedAt).toLocaleDateString()}
             </span>
           </div>
           <p className="text-base mobile:text-lg leading-relaxed">

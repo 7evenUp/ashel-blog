@@ -11,22 +11,22 @@ type ImageWrapperProps = {
 const ImageWrapper = ({title, desc, src}: ImageWrapperProps) => {
   const [photoUrl, setPhotoUrl] = useState("")
 
-  const downloadImage = async (path: string) => {
-    try {
-      const { data, error } = await supabase.storage
-        .from('photos')
-        .download(path)
-
-      if (error) throw error
-
-      const url = URL.createObjectURL(data)
-      setPhotoUrl(url)
-    } catch (error) {
-      console.log('Error downloading image: ', error)
-    }
-  }
-
   useEffect(() => {
+    const downloadImage = async (path: string) => {
+      try {
+        const { data, error } = await supabase.storage
+          .from('photos')
+          .download(path)
+  
+        if (error) throw error
+  
+        const url = URL.createObjectURL(data)
+        setPhotoUrl(url)
+      } catch (error) {
+        console.log('Error downloading image: ', error)
+      }
+    }
+
     downloadImage(src)
   }, [])
   

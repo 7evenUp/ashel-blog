@@ -13,24 +13,33 @@ const EditorStateView = ({ data }) => {
 
   return (
     <div className="flex flex-col w-full text-sm mobile:text-lg leading-relaxed xl:max-w-[1000px]">
-      {
-        // @ts-ignore
-        JSON.parse(data).root.children.map(renderData)
-      }
+      {JSON.parse(data).root.children.map(renderData)}
     </div>
   );
 };
 
 export default EditorStateView;
 
-const renderData = (rootElement: PostDataType, key: number) => {
+const renderData = (rootElement: PostDataType) => {
   if (rootElement.type === "heading") {
     if (rootElement.tag === "h1")
-      return <h2 className="text-2xl font-medium mb-4 mt-6">{rootElement.children[0]?.text}</h2>;
+      return (
+        <h2 className="text-2xl font-medium mb-4 mt-6">
+          {rootElement.children[0]?.text}
+        </h2>
+      );
     else if (rootElement.tag === "h2")
-      return <h3 className="text-xl font-medium mb-2 mt-4">{rootElement.children[0]?.text}</h3>;
+      return (
+        <h3 className="text-xl font-medium mb-2 mt-4">
+          {rootElement.children[0]?.text}
+        </h3>
+      );
     else if (rootElement.tag === "h3")
-      return <h3 className="text-lg font-medium mb-2 mt-4">{rootElement.children[0]?.text}</h3>;
+      return (
+        <h3 className="text-lg font-medium mb-2 mt-4">
+          {rootElement.children[0]?.text}
+        </h3>
+      );
   } else if (rootElement.type === "paragraph")
     return renderParagraph(rootElement);
   else if (rootElement.type === "list") return renderList(rootElement);
@@ -39,9 +48,11 @@ const renderData = (rootElement: PostDataType, key: number) => {
   else if (rootElement.type === "horizontalrule")
     return (
       <div className="w-full my-8 flex justify-center gap-3">
-        {new Array(5).fill(null).map(() => (<span className="w-1 h-1 rounded-full bg-grey" />))}
+        {new Array(5).fill(null).map((_, i) => (
+          <span key={i} className="w-1 h-1 rounded-full bg-grey" />
+        ))}
       </div>
-    )
+    );
   else return <span>Not heading</span>;
 };
 
@@ -66,13 +77,12 @@ const renderParagraph = (rootElement: PostDataType) => {
         {rootElement.children.map(renderParagraphChildren)}
       </p>
     );
-  return <p className="my-1">{rootElement.children.map(renderParagraphChildren)}</p>;
+  return (
+    <p className="my-1">{rootElement.children.map(renderParagraphChildren)}</p>
+  );
 };
 
-const renderParagraphChildren = (
-  textEl: PostParagraphType & TextNodeType,
-  key: number
-) => {
+const renderParagraphChildren = (textEl: PostParagraphType & TextNodeType) => {
   if (textEl.type === "linebreak") return <br />;
   else if (textEl.type === "link")
     return (
@@ -80,7 +90,7 @@ const renderParagraphChildren = (
         className="underline underline-offset-2 text-cyan-500"
         href={textEl.url}
         target="_blank"
-        rel="noopener"
+        rel="noreferrer"
       >
         {textEl.children[0].text}
       </a>
@@ -119,24 +129,24 @@ const renderList = (rootElement: PostListType) => {
   if (rootElement.listType === "bullet") {
     return (
       <ul className="list-disc list-inside ml-4">
-        {rootElement.children.map((el, key) => {
-          return <li>{el.children?.map(renderParagraphChildren)}</li>;
+        {rootElement.children.map((el, i) => {
+          return <li key={i}>{el.children?.map(renderParagraphChildren)}</li>;
         })}
       </ul>
     );
   } else if (rootElement.listType === "number") {
     return (
       <ol className="list-decimal list-inside ml-4">
-        {rootElement.children.map((el, key) => {
-          return <li>{el.children?.map(renderParagraphChildren)}</li>;
+        {rootElement.children.map((el, i) => {
+          return <li key={i}>{el.children?.map(renderParagraphChildren)}</li>;
         })}
       </ol>
     );
   } else if (rootElement.listType === "check") {
     return (
       <div>
-        {rootElement.children.map((el, key) => (
-          <div className="flex gap-2 items-center">
+        {rootElement.children.map((el, i) => (
+          <div key={i} className="flex gap-2 items-center">
             <span
               className={`border rounded w-5 h-5 block ${
                 el.checked ? "border-cyan-400" : "border-slate-400"
@@ -161,7 +171,7 @@ const renderBlockquote = (rootElement) => {
 const renderCode = (rootElement) => {
   return (
     <pre>
-      {rootElement.children.map((el, key) => {
+      {rootElement.children.map((el) => {
         if (el.type === "linebreak") return <br />;
         else if (el.type === "code-highlight") {
           if (el.highlightType) {

@@ -29,7 +29,6 @@ import {
   HeadingTagType,
 } from "@lexical/rich-text";
 import {
-  $getSelectionStyleValueForProperty,
   $patchStyleText,
   $selectAll,
   $wrapLeafNodesInElements,
@@ -832,7 +831,7 @@ export default function ToolbarPlugin(): JSX.Element {
           onClick={() => {
             activeEditor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify");
           }}
-          className="item" 
+          className="item"
         >
           <i className="icon justify-align" />
           <span className="text">Justify Align</span>

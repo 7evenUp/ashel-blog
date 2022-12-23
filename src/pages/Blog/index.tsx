@@ -3,7 +3,6 @@ import { trpc } from "../../utils/trpc";
 import Post from "./components/Post";
 
 const Blog: NextPage = () => {
-  const x = trpc.useQuery(["example.hello"]);
   const {
     data: posts,
     isLoading,
@@ -30,7 +29,7 @@ const Blog: NextPage = () => {
   return (
     <>
       <div className="flex flex-col gap-24 mt-16 w-full">
-        { isSuccess && posts.map(post => <Post key={post.id} post={post} />) }
+        {isSuccess && posts.map((post) => <Post key={post.id} post={post} />)}
       </div>
     </>
   );
