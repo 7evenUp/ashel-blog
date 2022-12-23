@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { supabase } from "../../../supabase/supabaseClient";
+import { supabase } from "../supabase/supabaseClient";
 
 type ImageWrapperProps = {
   title: string

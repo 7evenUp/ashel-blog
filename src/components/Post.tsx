@@ -2,7 +2,7 @@ import { Post } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { supabase } from "../../../supabase/supabaseClient";
+import { supabase } from "../supabase/supabaseClient";
 
 const Post = ({ post }: { post: Post }) => {
   const [url, setUrl] = useState("");

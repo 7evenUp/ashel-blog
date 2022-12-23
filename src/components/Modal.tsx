@@ -1,7 +1,7 @@
 import { Post } from "@prisma/client";
 import React, { Dispatch, SetStateAction } from "react";
-import { supabase } from "../../../../supabase/supabaseClient";
-import { trpc } from "../../../../utils/trpc";
+import { supabase } from "../supabase/supabaseClient";
+import { trpc } from "../utils/trpc";
 
 const Modal = ({
   state,

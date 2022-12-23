@@ -5,7 +5,7 @@ import {
 } from "next";
 import React from "react";
 import { prisma } from "../../server/db/client";
-import EditorStateView from "./components/EditorStateView";
+import EditorStateView from "../../components/EditorStateView";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await prisma.post.findMany({

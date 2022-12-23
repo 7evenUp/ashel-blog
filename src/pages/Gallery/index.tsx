@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { trpc } from "../../utils/trpc";
-import ImageWrapper from "./components/ImageWrapper";
+import ImageWrapper from "../../components/ImageWrapper";
 
 const Gallery: NextPage = () => {
   const { data, error, isLoading } = trpc.useQuery(["example.getAll"]);
