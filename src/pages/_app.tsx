@@ -7,6 +7,7 @@ import type { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
 import { AdminLayout, Layout } from "../components";
 import type { AppRouter } from "../server/router";
+import { Analytics } from '@vercel/analytics/react';
 import "../styles/globals.css";
 
 const MyApp: AppType = ({
@@ -26,6 +27,7 @@ const MyApp: AppType = ({
           <Component {...pageProps} />
         </Layout>
       )}
+      <Analytics />
     </SessionProvider>
   );
 };
