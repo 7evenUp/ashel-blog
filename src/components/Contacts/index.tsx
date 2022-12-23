@@ -20,7 +20,11 @@ export default function Contacts() {
             </a>
           </li>
           <li className="hover:text-slate-700 hover:drop-shadow-none transition-all">
-            <a href="https://www.instagram.com/7_even_up" target="_blank">
+            <a
+              href="https://www.instagram.com/7_even_up"
+              target="_blank"
+              rel="noreferrer"
+            >
               Нельзяграммъ
             </a>
           </li>

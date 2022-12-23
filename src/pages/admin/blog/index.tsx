@@ -45,7 +45,6 @@ const Blog: NextPage = () => {
       setPublishedPosts(
         posts
           .filter((post) => post.publishedAt)
-          // @ts-ignore
           .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime())
       );
       setUnpublishedPosts(
