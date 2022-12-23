@@ -8,7 +8,7 @@ import { prisma } from "../../../server/db/client";
 import { trpc } from "../../../utils/trpc";
 import FloatButtons from "./components/FloatButtons";
 import Modal from "./components/Modal";
-import Editor from "./Editor";
+import Editor from "./components/Editor";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await prisma.post.findMany({

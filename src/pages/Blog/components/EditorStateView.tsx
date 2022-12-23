@@ -1,12 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import {
-  PostParagraphType,
-  PostDataType,
-  PostImageType,
-  TextNodeType,
-  PostListType,
-} from "../types";
 
 const EditorStateView = ({ data }) => {
   if (!data) return null;
@@ -20,7 +13,7 @@ const EditorStateView = ({ data }) => {
 
 export default EditorStateView;
 
-const renderData = (rootElement: PostDataType) => {
+const renderData = (rootElement) => {
   if (rootElement.type === "heading") {
     if (rootElement.tag === "h1")
       return (
@@ -56,7 +49,7 @@ const renderData = (rootElement: PostDataType) => {
   else return <span>Not heading</span>;
 };
 
-const renderParagraph = (rootElement: PostDataType) => {
+const renderParagraph = (rootElement) => {
   if (rootElement.direction === null)
     return renderImage(rootElement.children[0]);
   else if (rootElement.format === "left")
@@ -82,7 +75,7 @@ const renderParagraph = (rootElement: PostDataType) => {
   );
 };
 
-const renderParagraphChildren = (textEl: PostParagraphType & TextNodeType) => {
+const renderParagraphChildren = (textEl) => {
   if (textEl.type === "linebreak") return <br />;
   else if (textEl.type === "link")
     return (
@@ -98,7 +91,7 @@ const renderParagraphChildren = (textEl: PostParagraphType & TextNodeType) => {
   else if (textEl.type === "text") return renderTextNode(textEl);
 };
 
-const renderTextNode = (textNode: TextNodeType) => {
+const renderTextNode = (textNode) => {
   if (textNode.format === 0)
     return <React.Fragment>{textNode.text}</React.Fragment>;
   else if (textNode.format === 1) return <b>{textNode.text}</b>;
@@ -111,7 +104,7 @@ const renderTextNode = (textNode: TextNodeType) => {
   else if (textNode.format === 64) return <sup>{textNode.text}</sup>;
 };
 
-const renderImage = (imageElement: PostImageType) => {
+const renderImage = (imageElement) => {
   return (
     <Image
       className="my-8"
@@ -125,7 +118,7 @@ const renderImage = (imageElement: PostImageType) => {
   );
 };
 
-const renderList = (rootElement: PostListType) => {
+const renderList = (rootElement) => {
   if (rootElement.listType === "bullet") {
     return (
       <ul className="list-disc list-inside ml-4">
