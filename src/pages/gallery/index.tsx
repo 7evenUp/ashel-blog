@@ -30,19 +30,4 @@ const Gallery: NextPage = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getServerAuthSession(context);
-
-  if (session) {
-    return {
-      redirect: {
-        destination: "/admin",
-        permanent: false,
-      },
-    };
-  }
-
-  return { props: {} };
-};
-
 export default Gallery;
