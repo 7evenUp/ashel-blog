@@ -1,6 +1,7 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import { trpc } from "../../utils/trpc";
 import ImageWrapper from "../../components/ImageWrapper";
+import { getServerAuthSession } from "../../server/common/get-server-auth-session";
 
 const Gallery: NextPage = () => {
   const { data, error, isLoading } = trpc.useQuery(["example.getAll"]);
@@ -27,6 +28,21 @@ const Gallery: NextPage = () => {
       </div>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getServerAuthSession(context);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/admin",
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
 };
 
 export default Gallery;
