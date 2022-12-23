@@ -24,7 +24,7 @@ const PostCard = ({
         </span>
       )}
       <div className="flex gap-6 justify-between">
-        <Link href={`/admin/blog/${post.id}`}>
+        <Link href={`/admin/blogx/${post.id}`}>
           <a className="w-1/2 rounded-md bg-white hover:bg-black hover:text-white transition-all py-1 text-center">
             edit
           </a>

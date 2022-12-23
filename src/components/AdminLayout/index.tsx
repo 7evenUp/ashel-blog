@@ -13,13 +13,13 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     <>
       <header className="w-full flex items-center justify-center border-b border-slate-700 py-4 sticky top-0 bg-white z-10">
         <ul className="flex gap-5 sm:gap-10 sm:text-xl">
-          <li className={router.pathname === '/admin/blog' ? 'font-semibold' : ''}>
-            <Link href="/admin/blog">
+          <li className={router.pathname === '/admin/blogx' ? 'font-semibold' : ''}>
+            <Link href="/admin/blogx">
               <a>Блог</a>
             </Link>
           </li>
-          <li className={router.pathname === '/admin/gallery' ? 'font-semibold' : ''}>
-            <Link href="/admin/gallery">
+          <li className={router.pathname === '/admin/galleryx' ? 'font-semibold' : ''}>
+            <Link href="/admin/galleryx">
               <a>Фотки</a>
             </Link>
           </li>
