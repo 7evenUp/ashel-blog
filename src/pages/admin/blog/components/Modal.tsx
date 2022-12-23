@@ -26,7 +26,7 @@ const Modal = ({
         const { data, error } = await supabase.storage.from('photos').remove([post.image])
         if (error) console.error(error)
       }
-
+      
       const folderName = 'posts'
       const [fileName, fileExt] = file.name.split(".");
       const filePath = `${folderName}/${fileName}.${fileExt}`;
