@@ -9,6 +9,7 @@ import { prisma } from "../../../server/db/client";
 import { trpc } from "../../../utils/trpc";
 import FloatButtons from "../../../components/FloatButtons";
 import Modal from "../../../components/Modal";
+import { env } from "../../../env/client.mjs";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await prisma.post.findMany({
@@ -44,7 +45,6 @@ export const getStaticProps = async (
             createdAt: new Date(post.createdAt).toLocaleDateString(),
           },
         },
-        revalidate: 10
       };
     }
   }
@@ -68,6 +68,48 @@ const Post = ({
   const publishMutation = trpc.useMutation("posts.publish");
 
   const changeModalStatus = () => setIsModalOpened(!isModalOpened);
+
+  const handleSave = async () => {
+    if (post !== undefined) {
+      await fetch(
+        `/api/revalidate?secret=${env.NEXT_PUBLIC_REVALIDATE_SECRET}&id=${post.id}`
+      );
+
+      await saveMutation.mutateAsync(
+        {
+          id: post.id,
+          title,
+          desc: description,
+          content: editorState || "",
+        },
+        {
+          onSuccess: (data) => {
+            console.log(data);
+          },
+        }
+      );
+    }
+  };
+
+  const handlePublish = async () => {
+    if (post !== undefined) {
+      await fetch(
+        `/api/revalidate?secret=${env.NEXT_PUBLIC_REVALIDATE_SECRET}&id=${post.id}`
+      );
+
+      await publishMutation.mutateAsync(
+        {
+          id: post.id,
+          title,
+          desc: description,
+          content: editorState || "",
+        },
+        {
+          onSuccess: (data) => console.log(data),
+        }
+      );
+    }
+  };
 
   return (
     <>
@@ -106,41 +148,20 @@ const Post = ({
         </div>
       )}
 
-      {isModalOpened && <Modal post={post} state={description} setState={setDescription} close={changeModalStatus} />}
-
-      {post !== undefined && (
-        <FloatButtons
-          states={{ title, desc: description, content: editorState }}
-          handlePublish={async () => {
-            await publishMutation.mutateAsync(
-              {
-                id: post.id,
-                title,
-                desc: description,
-                content: editorState || "",
-              },
-              {
-                onSuccess: (data) => console.log(data),
-              }
-            );
-          }}
-          handleSave={async () => {
-            await saveMutation.mutateAsync(
-              {
-                id: post.id,
-                title,
-                desc: description,
-                content: editorState || "",
-              },
-              {
-                onSuccess: (data) => {
-                  console.log(data);
-                },
-              }
-            );
-          }}
+      {isModalOpened && (
+        <Modal
+          post={post}
+          state={description}
+          setState={setDescription}
+          close={changeModalStatus}
         />
       )}
+
+      <FloatButtons
+        states={{ title, desc: description, content: editorState }}
+        handleSave={handleSave}
+        handlePublish={handlePublish}
+      />
     </>
   );
 };

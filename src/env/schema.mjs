@@ -12,7 +12,7 @@ export const serverSchema = z.object({
   NEXTAUTH_URL: z.string().url(),
   CREDENTIALS_USERNAME: z.string(),
   CREDENTIALS_PASSWORD: z.string(),
-  
+  REVALIDATE_SECRET: z.string(),
 });
 
 /**
@@ -22,7 +22,8 @@ export const serverSchema = z.object({
  */
 export const clientSchema = z.object({
   NEXT_PUBLIC_SUPABASE_URL: z.string(),
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string()
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string(),
+  NEXT_PUBLIC_REVALIDATE_SECRET: z.string()
 });
 
 /**
@@ -34,5 +35,6 @@ export const clientSchema = z.object({
 export const clientEnv = {
   // NEXT_PUBLIC_BAR: process.env.NEXT_PUBLIC_BAR,
   NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  NEXT_PUBLIC_REVALIDATE_SECRET: process.env.NEXT_PUBLIC_REVALIDATE_SECRET
 };
