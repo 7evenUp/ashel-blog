@@ -4,7 +4,7 @@ export const aboutData: AboutItemType[] = [
   {
     heading: 'Занимаюсь разработкой',
     body: 'Начал свой путь программиста в 2017. Началось с обычных сайтиков на HTML и CSS. Продолжилось созданием интерфейсов на React.js и серверной части на Node.js. Сейчас с Next.js работаю и мобилки на React Native делаю. Могу немного Python. Еще в Web3 развиваюсь.',
-    link: 'http://ashel.site/'
+    link: 'https://7evenup.github.io/ashel-portfolio/build/index.html'
   },
   {
     heading: 'Дизайню дизайны',

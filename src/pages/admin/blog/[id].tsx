@@ -148,7 +148,7 @@ const Post = ({
         </div>
       )}
 
-      {isModalOpened && (
+      {isModalOpened && post !== undefined && (
         <Modal
           post={post}
           state={description}
