@@ -3,6 +3,7 @@ export { default as Footer } from "./Footer";
 export { default as AboutItem } from "./AboutItem";
 export { default as Contacts } from "./Contacts";
 export { default as Layout } from "./Layout";
+export { default as AdminLayout } from "./AdminLayout";
 export { default as EditorStateView } from "./EditorStateView";
 export { default as FloatButtons } from "./FloatButtons";
 export { default as ImageWrapper } from "./ImageWrapper";

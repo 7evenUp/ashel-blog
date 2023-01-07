@@ -5,7 +5,6 @@ import { supabase } from "../../supabase/supabaseClient";
 
 const Admin: NextPage = () => {
   const { data: session } = useSession();
-  console.log("Session in client", session);
 
   const onSelectFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) return;
@@ -15,19 +14,12 @@ const Admin: NextPage = () => {
     if (file === undefined) return;
 
     if (file.type && file.type.startsWith("image/")) {
-      // const reader = new FileReader()
-
-      // reader.addEventListener('load', () => {
-      //   console.log(reader.result)
-      // })
       const fileExt = file.name.split(".").pop();
       const filePath = `111.${fileExt}`;
 
       const { data: uploadData, error } = await supabase.storage
         .from("photos")
         .upload(filePath, file);
-
-      // const
 
       if (error) console.error(error);
       else {
@@ -43,8 +35,6 @@ const Admin: NextPage = () => {
 
         console.log(data);
       }
-
-      // reader.readAsDataURL(file)
     }
   };
 
@@ -68,8 +58,6 @@ export default Admin;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerAuthSession(context);
-
-  console.log("Session in Server", session);
 
   if (!session) {
     return {

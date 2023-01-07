@@ -6,7 +6,6 @@ import { env } from "../../../env/server.mjs";
 export const authOptions: NextAuthOptions = {
   callbacks: {
     session: ({ session, token }) => {
-      console.log('Token value in nextauth callbacks: ', token);
       if (session.user && token.sub) session.user.id = token.sub;
       return session;
     },

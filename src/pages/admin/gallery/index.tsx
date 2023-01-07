@@ -16,8 +16,6 @@ export default Gallery;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerAuthSession(context);
 
-  console.log("Session in Server", session);
-
   if (!session) {
     return {
       redirect: {

@@ -17,8 +17,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     },
   });
 
-  console.log("Hello from getStaticPaths");
-
   return {
     paths: posts.map((post) => ({ params: { id: `${post.id}` } })),
     fallback: false,
@@ -34,8 +32,6 @@ export const getStaticProps = async (
         id: parseInt(context.params?.id),
       },
     });
-
-    console.log("FINDING POST", post);
 
     if (post !== null && post.publishedAt) {
       return {

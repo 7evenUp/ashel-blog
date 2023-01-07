@@ -25,11 +25,9 @@ export const postsRouter = createRouter()
       title: z.string(),
     }),
     resolve: async ({ input, ctx }) => {
-      console.log("inside tRPC resolver");
       const res = await ctx.prisma.post.create({
         data: { title: input.title || "" },
       });
-      console.log(res);
       return res;
     },
   })
@@ -107,7 +105,6 @@ export const postsRouter = createRouter()
           id: input.id,
         },
       });
-      console.log("DELETED POST IS:", deletedPost);
       return deletedPost;
     },
   });

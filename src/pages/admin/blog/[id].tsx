@@ -83,9 +83,7 @@ const Post = ({
           content: editorState || "",
         },
         {
-          onSuccess: (data) => {
-            console.log(data);
-          },
+          onSuccess: (data) => console.log(data),
         }
       );
     }
