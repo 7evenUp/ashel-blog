@@ -23,6 +23,7 @@ export const authOptions: NextAuthOptions = {
           credentials.password === env.CREDENTIALS_PASSWORD
         ) {
           return {
+            id: '0',
             name: 'Artyom Shel',
             username: credentials.username,
             email: "sheludeshev.artyom@mail.ru",
