@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { trpc } from "../../utils/trpc";
-import Post from "../../components/Post";
+import { Post } from "../../components";
 
 const Blog: NextPage = () => {
   const {

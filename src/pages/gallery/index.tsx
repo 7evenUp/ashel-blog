@@ -1,6 +1,6 @@
 import type { GetServerSideProps, NextPage } from "next";
 import { trpc } from "../../utils/trpc";
-import ImageWrapper from "../../components/ImageWrapper";
+import { ImageWrapper } from "../../components";
 import { getServerAuthSession } from "../../server/common/get-server-auth-session";
 
 const Gallery: NextPage = () => {

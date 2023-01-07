@@ -2,7 +2,7 @@ import { Post } from "@prisma/client";
 import type { GetServerSideProps, NextPage } from "next";
 import router from "next/router";
 import { useEffect, useState } from "react";
-import PostCard from "../../../components/PostCard";
+import { PostCard } from "../../../components";
 import { getServerAuthSession } from "../../../server/common/get-server-auth-session";
 import { trpc } from "../../../utils/trpc";
 

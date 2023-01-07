@@ -1,5 +1,5 @@
 import React from "react";
-import { AboutItemType } from "../../types/AboutItemType";
+import { AboutItemType } from "../types/AboutItemType";
 
 export default function AboutItem({ heading, body, link }: AboutItemType) {
   return (
