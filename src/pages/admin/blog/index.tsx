@@ -3,6 +3,7 @@ import type { GetServerSideProps, NextPage } from "next";
 import router from "next/router";
 import { useEffect, useState } from "react";
 import { PostCard } from "../../../components";
+import { env } from "../../../env/client.mjs";
 import { getServerAuthSession } from "../../../server/common/get-server-auth-session";
 import { trpc } from "../../../utils/trpc";
 
@@ -22,7 +23,10 @@ const Blog: NextPage = () => {
     await createMutation.mutateAsync(
       { title: "" },
       {
-        onSuccess: (data) => {
+        onSuccess: async (data) => {
+          await fetch(
+            `/api/revalidate?secret=${env.NEXT_PUBLIC_REVALIDATE_SECRET}&id=${data.id}`
+          );
           router.push(`/admin/blog/${data.id}`);
         },
       }
