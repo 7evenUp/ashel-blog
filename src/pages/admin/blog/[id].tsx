@@ -10,24 +10,11 @@ import { trpc } from "../../../utils/trpc";
 import { FloatButtons } from "../../../components";
 import { Modal } from "../../../components";
 import { env } from "../../../env/client.mjs";
+import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from "next/types";
+import { Post } from "@prisma/client";
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await prisma.post.findMany({
-    select: {
-      id: true,
-    },
-  });
-
-  return {
-    paths: posts.map((post) => ({ params: { id: `${post.id}` } })),
-    fallback: false,
-  };
-};
-
-export const getStaticProps = async (
-  context: GetStaticPropsContext<{ id: string }>
-) => {
-  if (context.params?.id) {
+export const getServerSideProps: GetServerSideProps<{ post: Post, error: boolean, message: string }> = async (context) => {
+  if (context.params?.id && !Array.isArray(context.params.id)) {
     const post = await prisma.post.findFirst({
       where: {
         id: parseInt(context.params?.id),
@@ -51,15 +38,62 @@ export const getStaticProps = async (
 
   return {
     props: {
-      error: "Error",
-    },
-  };
-};
+      error: true,
+      message: 'Error inside getServerSideProps'
+    }
+  }
+}
+
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   const posts = await prisma.post.findMany({
+//     select: {
+//       id: true,
+//     },
+//   });
+
+//   return {
+//     paths: posts.map((post) => ({ params: { id: `${post.id}` } })),
+//     fallback: false,
+//   };
+// };
+
+// export const getStaticProps = async (
+//   context: GetStaticPropsContext<{ id: string }>
+// ) => {
+//   if (context.params?.id) {
+//     const post = await prisma.post.findFirst({
+//       where: {
+//         id: parseInt(context.params?.id),
+//       },
+//     });
+
+//     if (post !== null) {
+//       return {
+//         props: {
+//           post: {
+//             ...post,
+//             publishedAt: post.publishedAt
+//               ? new Date(post.publishedAt).toLocaleDateString()
+//               : null,
+//             createdAt: new Date(post.createdAt).toLocaleDateString(),
+//           },
+//         },
+//       };
+//     }
+//   }
+
+//   return {
+//     props: {
+//       error: "Error",
+//     },
+//   };
+// };
 
 const Post = ({
   post,
   error,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  message
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [title, setTitle] = useState(post?.title || "");
   const [description, setDescription] = useState(post?.desc || "");
   const [editorState, setEditorState] = useState(post?.content || "");
@@ -111,7 +145,7 @@ const Post = ({
 
   return (
     <>
-      {error && <h1>Error occured!</h1>}
+      {error && <h1>Error occured! {message}</h1>}
 
       {post !== undefined && (
         <div className="flex flex-col gap-2 w-full">
