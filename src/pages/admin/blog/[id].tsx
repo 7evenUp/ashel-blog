@@ -26,10 +26,10 @@ export const getServerSideProps: GetServerSideProps<{ post: Post, error: boolean
         props: {
           post: {
             ...post,
-            publishedAt: post.publishedAt
-              ? new Date(post.publishedAt).toLocaleDateString()
-              : null,
-            createdAt: new Date(post.createdAt).toLocaleDateString(),
+            // publishedAt: post.publishedAt
+            //   ? new Date(post.publishedAt).toLocaleDateString()
+            //   : null,
+            // createdAt: new Date(post.createdAt).toLocaleDateString(),
           },
         },
       };
