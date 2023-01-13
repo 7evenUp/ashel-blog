@@ -48,12 +48,12 @@ const Blog: NextPage = () => {
     if (posts) {
       setPublishedPosts(
         posts
-          .filter((post) => post.publishedAt)
+          .filter(post => post.published)
           .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime())
       );
       setUnpublishedPosts(
         posts
-          .filter((post) => !post.published)
+          .filter(post => !post.published)
           .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
       );
     }
