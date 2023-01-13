@@ -37,7 +37,6 @@ function convertImageElement(domNode: Node): null | DOMConversionOutput {
 export type SerializedImageNode = Spread<
   {
     altText: string;
-    caption: SerializedEditor;
     height?: number;
     maxWidth: number;
     src: string;
@@ -117,7 +116,6 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
   exportJSON(): SerializedImageNode {
     return {
       altText: this.getAltText(),
-      caption: this.__caption.toJSON(),
       height: this.__height === "inherit" ? 0 : this.__height,
       maxWidth: this.__maxWidth,
       src: this.getSrc(),
@@ -175,7 +173,6 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
           height={this.__height}
           maxWidth={this.__maxWidth}
           nodeKey={this.getKey()}
-          showCaption={this.__showCaption}
           caption={this.__caption}
           captionsEnabled={this.__captionsEnabled}
           resizable={true}

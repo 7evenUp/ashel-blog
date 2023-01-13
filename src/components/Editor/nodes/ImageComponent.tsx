@@ -79,19 +79,14 @@ export default function ImageComponent({
   width,
   height,
   maxWidth,
-  showCaption,
-  caption,
 }: {
   altText: string;
-  caption: LexicalEditor;
   height: 'inherit' | number;
   maxWidth: number;
   nodeKey: NodeKey;
   resizable: boolean;
-  showCaption: boolean;
   src: string;
   width: 'inherit' | number;
-  captionsEnabled: boolean;
 }): JSX.Element {
   const imageRef = useRef<null | HTMLImageElement>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -125,13 +120,7 @@ export default function ImageComponent({
         $isNodeSelection(latestSelection) &&
         latestSelection.getNodes().length === 1
       ) {
-        if (showCaption) {
-          // Move focus into nested editor
-          $setSelection(null);
-          event.preventDefault();
-          caption.focus();
-          return true;
-        } else if (
+        if (
           buttonElem !== null &&
           buttonElem !== document.activeElement
         ) {
@@ -142,13 +131,12 @@ export default function ImageComponent({
       }
       return false;
     },
-    [caption, isSelected, showCaption],
+    [isSelected],
   );
 
   const onEscape = useCallback(
     (event: KeyboardEvent) => {
       if (
-        activeEditorRef.current === caption ||
         buttonRef.current === event.target
       ) {
         $setSelection(null);
@@ -163,7 +151,7 @@ export default function ImageComponent({
       }
       return false;
     },
-    [caption, editor, setSelected],
+    [editor, setSelected],
   );
 
   useEffect(() => {
@@ -204,7 +192,7 @@ export default function ImageComponent({
   ]);
 
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<span>Loading image . . .</span>}>
       <>
         <div>
           <LazyImage
