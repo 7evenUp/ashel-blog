@@ -21,7 +21,7 @@ export default defineNextConfig({
     defaultLocale: "en",
   },
   images: {
-    domains: ['ntorzmsgnfxlxdfetvfz.supabase.co']
+    domains: ['ntorzmsgnfxlxdfetvfz.supabase.co', 'random.imagecdn.app', 'images.unsplash.com']
   },
   typescript: {
     ignoreBuildErrors: true
