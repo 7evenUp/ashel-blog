@@ -1,8 +1,3 @@
-import {
-  GetStaticPaths,
-  GetStaticPropsContext,
-  InferGetStaticPropsType,
-} from "next";
 import React, { useState } from "react";
 import Editor from "../../../components/Editor";
 import { prisma } from "../../../server/db/client";
@@ -10,10 +5,14 @@ import { trpc } from "../../../utils/trpc";
 import { FloatButtons } from "../../../components";
 import { Modal } from "../../../components";
 import { env } from "../../../env/client.mjs";
-import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from "next/types";
-import { Post } from "@prisma/client";
+import {
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from "next/types";
 
-export const getServerSideProps: GetServerSideProps<{ post: Post, error: boolean, message: string }> = async (context) => {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext<{ id: string }>
+) => {
   if (context.params?.id && !Array.isArray(context.params.id)) {
     const post = await prisma.post.findFirst({
       where: {
@@ -26,10 +25,10 @@ export const getServerSideProps: GetServerSideProps<{ post: Post, error: boolean
         props: {
           post: {
             ...post,
-            // publishedAt: post.publishedAt
-            //   ? new Date(post.publishedAt).toLocaleDateString()
-            //   : null,
-            // createdAt: new Date(post.createdAt).toLocaleDateString(),
+            publishedAt: post.publishedAt
+              ? new Date(post.publishedAt).toLocaleDateString()
+              : null,
+            createdAt: new Date(post.createdAt).toLocaleDateString(),
           },
         },
       };
@@ -39,60 +38,15 @@ export const getServerSideProps: GetServerSideProps<{ post: Post, error: boolean
   return {
     props: {
       error: true,
-      message: 'Error inside getServerSideProps'
-    }
-  }
-}
-
-// export const getStaticPaths: GetStaticPaths = async () => {
-//   const posts = await prisma.post.findMany({
-//     select: {
-//       id: true,
-//     },
-//   });
-
-//   return {
-//     paths: posts.map((post) => ({ params: { id: `${post.id}` } })),
-//     fallback: false,
-//   };
-// };
-
-// export const getStaticProps = async (
-//   context: GetStaticPropsContext<{ id: string }>
-// ) => {
-//   if (context.params?.id) {
-//     const post = await prisma.post.findFirst({
-//       where: {
-//         id: parseInt(context.params?.id),
-//       },
-//     });
-
-//     if (post !== null) {
-//       return {
-//         props: {
-//           post: {
-//             ...post,
-//             publishedAt: post.publishedAt
-//               ? new Date(post.publishedAt).toLocaleDateString()
-//               : null,
-//             createdAt: new Date(post.createdAt).toLocaleDateString(),
-//           },
-//         },
-//       };
-//     }
-//   }
-
-//   return {
-//     props: {
-//       error: "Error",
-//     },
-//   };
-// };
+      message: "Error inside getServerSideProps",
+    },
+  };
+};
 
 const Post = ({
   post,
   error,
-  message
+  message,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [title, setTitle] = useState(post?.title || "");
   const [description, setDescription] = useState(post?.desc || "");
