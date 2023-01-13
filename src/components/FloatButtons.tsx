@@ -1,7 +1,9 @@
 const FloatButtons = ({
   handlePublish,
   handleSave,
-  states: {title, desc, content}
+  states: {title, desc, content},
+  isSaving,
+  isPublishing
 }: {
   handlePublish: () => void;
   handleSave: () => void;
@@ -10,7 +12,10 @@ const FloatButtons = ({
     desc: string
     content: string
   }
+  isSaving: boolean
+  isPublishing: boolean
 }) => {
+  
   return (
     <div className="fixed bottom-8 right-8 flex gap-4 z-50">
       <button
@@ -18,7 +23,7 @@ const FloatButtons = ({
         type="button"
         onClick={handleSave}
       >
-        Save
+        {isSaving ? 'Saving' : 'Save'}
       </button>
       <button
         disabled={title === "" || desc === "" || content === ""}
@@ -26,7 +31,7 @@ const FloatButtons = ({
         type="button"
         onClick={handlePublish}
       >
-        Publish
+        {isPublishing ? 'Publishing' : 'Publish'}
       </button>
     </div>
   );

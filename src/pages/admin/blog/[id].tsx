@@ -59,10 +59,6 @@ const Post = ({
 
   const handleSave = async () => {
     if (post !== undefined) {
-      await fetch(
-        `/api/revalidate?secret=${env.NEXT_PUBLIC_REVALIDATE_SECRET}&id=${post.id}`
-      );
-
       await saveMutation.mutateAsync(
         {
           id: post.id,
@@ -74,15 +70,15 @@ const Post = ({
           onSuccess: (data) => console.log(data),
         }
       );
+
+      await fetch(
+        `/api/revalidate?secret=${env.NEXT_PUBLIC_REVALIDATE_SECRET}&id=${post.id}`
+      );
     }
   };
 
   const handlePublish = async () => {
     if (post !== undefined) {
-      await fetch(
-        `/api/revalidate?secret=${env.NEXT_PUBLIC_REVALIDATE_SECRET}&id=${post.id}`
-      );
-
       await publishMutation.mutateAsync(
         {
           id: post.id,
@@ -93,6 +89,10 @@ const Post = ({
         {
           onSuccess: (data) => console.log(data),
         }
+      );
+
+      await fetch(
+        `/api/revalidate?secret=${env.NEXT_PUBLIC_REVALIDATE_SECRET}&id=${post.id}`
       );
     }
   };
@@ -145,6 +145,8 @@ const Post = ({
 
       <FloatButtons
         states={{ title, desc: description, content: editorState }}
+        isSaving={saveMutation.isLoading}
+        isPublishing={publishMutation.isLoading}
         handleSave={handleSave}
         handlePublish={handlePublish}
       />
