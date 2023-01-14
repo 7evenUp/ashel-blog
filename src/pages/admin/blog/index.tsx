@@ -2,7 +2,7 @@ import { Post } from "@prisma/client";
 import type { GetServerSideProps, NextPage } from "next";
 import router from "next/router";
 import { useEffect, useState } from "react";
-import { PostCard } from "../../../components";
+import PostCards from "../../../components/PostCards";
 import { env } from "../../../env/client.mjs";
 import { getServerAuthSession } from "../../../server/common/get-server-auth-session";
 import { trpc } from "../../../utils/trpc";
@@ -78,29 +78,16 @@ const Blog: NextPage = () => {
         </button>
       </div>
 
-      <h2 className="mb-4 mt-10">Published posts</h2>
-      <div className="grid grid-cols-3 gap-4 w-full">
-        {publishedPosts &&
-          publishedPosts.map((post) => (
-            <PostCard
-              key={post.id}
-              post={post}
-              handleDelete={handleDelete}
-            />
-          ))}
-      </div>
-
-      <h2 className="mb-4 mt-10">Unpublished posts</h2>
-      <div className="grid grid-cols-3 gap-4 w-full">
-        {unpublishedPosts &&
-          unpublishedPosts.map((post) => (
-            <PostCard
-              key={post.id}
-              post={post}
-              handleDelete={handleDelete}
-            />
-          ))}
-      </div>
+      <PostCards
+        title={"Published posts"}
+        posts={publishedPosts}
+        handleDelete={handleDelete}
+      />
+      <PostCards
+        title={"Unublished posts"}
+        posts={unpublishedPosts}
+        handleDelete={handleDelete}
+      />
     </>
   );
 };
