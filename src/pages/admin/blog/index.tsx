@@ -24,9 +24,9 @@ const Blog: NextPage = () => {
       { title: "" },
       {
         onSuccess: async (data) => {
-          await fetch(
-            `/api/revalidate?secret=${env.NEXT_PUBLIC_REVALIDATE_SECRET}&id=${data.id}`
-          );
+          // await fetch(
+          //   `/api/revalidate?secret=${env.NEXT_PUBLIC_REVALIDATE_SECRET}&id=${data.id}`
+          // );
           router.push(`/admin/blog/${data.id}`);
         },
       }
