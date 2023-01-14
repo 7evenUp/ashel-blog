@@ -1,6 +1,6 @@
 import { Post } from "@prisma/client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 const PostCard = ({
   post,
@@ -9,6 +9,7 @@ const PostCard = ({
   post: Post;
   handleDelete: (id: number) => void;
 }) => {
+  const [isDeleting, setIsDeleting] = useState(false)
   return (
     <div className="flex flex-col gap-4 bg-beige rounded-xl py-2 px-4 relative">
       {post.published && (
@@ -26,14 +27,17 @@ const PostCard = ({
       <div className="flex gap-6 justify-between">
         <Link href={`/admin/blog/${post.id}`}>
           <a className="w-1/2 rounded-md bg-white hover:bg-black hover:text-white transition-all py-1 text-center">
-            edit
+            Edit
           </a>
         </Link>
         <button
-          onClick={() => handleDelete(post.id)}
+          onClick={() => {
+            setIsDeleting(true)
+            handleDelete(post.id)
+          }}
           className="w-1/2 rounded-md bg-white hover:bg-black hover:text-white transition-all py-1"
         >
-          delete
+          { isDeleting ? 'Deleting' : 'Delete'}
         </button>
       </div>
     </div>

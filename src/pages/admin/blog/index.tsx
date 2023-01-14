@@ -48,12 +48,12 @@ const Blog: NextPage = () => {
     if (posts) {
       setPublishedPosts(
         posts
-          .filter(post => post.published)
+          .filter((post) => post.published)
           .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime())
       );
       setUnpublishedPosts(
         posts
-          .filter(post => !post.published)
+          .filter((post) => !post.published)
           .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
       );
     }
@@ -82,7 +82,11 @@ const Blog: NextPage = () => {
       <div className="grid grid-cols-3 gap-4 w-full">
         {publishedPosts &&
           publishedPosts.map((post) => (
-            <PostCard key={post.id} post={post} handleDelete={handleDelete} />
+            <PostCard
+              key={post.id}
+              post={post}
+              handleDelete={handleDelete}
+            />
           ))}
       </div>
 
@@ -90,7 +94,11 @@ const Blog: NextPage = () => {
       <div className="grid grid-cols-3 gap-4 w-full">
         {unpublishedPosts &&
           unpublishedPosts.map((post) => (
-            <PostCard key={post.id} post={post} handleDelete={handleDelete} />
+            <PostCard
+              key={post.id}
+              post={post}
+              handleDelete={handleDelete}
+            />
           ))}
       </div>
     </>
