@@ -1,21 +1,69 @@
 import type { GetServerSideProps, NextPage } from "next";
 import Image from "next/image";
 import { getServerAuthSession } from "../../../server/common/get-server-auth-session";
+import { supabase } from "../../../supabase/supabaseClient";
+import { trpc } from "../../../utils/trpc";
 
 const Gallery: NextPage = () => {
+  const createMutation = trpc.useMutation('gallery.create')
+
+  const handleCreate = async () => {
+    await createMutation.mutateAsync({
+      title: 'title321',
+      src: 'src123'
+    }, {
+      onSuccess: data => console.log(data)
+    })
+  }
+
+  const onSelectFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files === null) return;
+    const file = e.target.files[0]; 
+
+    if (file === undefined) return;
+
+    if (file.type && file.type.startsWith("image/")) {
+      const folderName = 'gallery'
+      const [fileName, ...rest] = file.name.split(".");
+      const fileExt = rest[rest.length - 1]
+      const filePath = `${folderName}/${fileName}.${fileExt}`;
+
+      const { data: uploadData, error } = await supabase.storage
+        .from("photos")
+        .upload(filePath, file);
+
+      if (error) console.error(error);
+      else {
+        console.log(uploadData)
+        // await pathMutation.mutateAsync({
+        //   id: post.id,
+        //   path: uploadData.path
+        // }, {
+        //   onSuccess: data => console.log('Success: ', data)
+        // })
+      }
+    }
+  };
+
   return (
     <>
       <div className="flex items-center gap-16 justify-start w-full">
         <h1 className="text-5xl leading-normal font-extrabold text-white drop-shadow-[0_0_1px_rgb(0,0,0)]">
           Кладезь эстетики
         </h1>
-        {/* <button
+
+        <label className="flex gap-4 items-center">
+          <span>Load Image</span>
+          <input type="file" accept="image/*" onChange={onSelectFile} required />
+        </label>
+
+        <button
           type="button"
           className="py-1 px-2 bg-beige rounded-md ml-auto"
           onClick={handleCreate}
         >
-          {createMutation.isLoading ? "Creating new post..." : "Create post"}
-        </button> */}
+          {createMutation.isLoading ? "Uploading photo..." : "Upload"}
+        </button>
       </div>
 
       <div className="grid gap-2 lg:gap-4 w-full lg:grid-cols-2 2xl:grid-cols-3 mt-5">
@@ -29,13 +77,23 @@ const Gallery: NextPage = () => {
           "https://images.unsplash.com/photo-1673423050335-43b991cf57e8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=1000&q=60",
         ].map((el, key) => {
           return (
-            <div className="relative w-full h-72 sm:h-80 md:h-96" key={key}>
+            <div className="group relative w-full h-72 sm:h-80 md:h-96" key={key}>
               <Image
-                className="object-cover"
+                className="object-cover grayscale-0 group-hover:grayscale group-hover:scale-110 duration-300"
                 src={el}
                 layout={"fill"}
                 sizes="(max-width: 1536px) 100vw,(max-width: 1024px) 50vw,33vw"
               />
+              <button
+                onClick={() => {
+                  // setIsDeleting(true)
+                  // handleDelete(post.id)
+                }}
+                className="absolute right-4 bottom-4 py-1 px-2 rounded-md bg-white hover:bg-black hover:text-white transition-all py-1"
+              >
+                {/* { isDeleting ? 'Deleting' : 'Delete'} */}
+                Delete
+              </button>
             </div>
           );
         })}
