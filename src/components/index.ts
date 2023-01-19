@@ -10,3 +10,4 @@ export { default as ImageWrapper } from "./ImageWrapper";
 export { default as Modal } from "./Modal";
 export { default as Post } from "./Post";
 export { default as PostCard } from "./PostCard";
+export { default as GalleryImage } from "./GalleryImage";

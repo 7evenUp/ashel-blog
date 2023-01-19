@@ -35,6 +35,12 @@ const Gallery: NextPage = () => {
       if (error) console.error(error);
       else {
         console.log(uploadData)
+        await createMutation.mutateAsync({
+          title: '123',
+          src: uploadData.path
+        }, {
+          onSuccess: data => console.log('Success upload:', data)
+        })
         // await pathMutation.mutateAsync({
         //   id: post.id,
         //   path: uploadData.path
@@ -82,7 +88,8 @@ const Gallery: NextPage = () => {
                 className="object-cover grayscale-0 group-hover:grayscale group-hover:scale-110 duration-300"
                 src={el}
                 layout={"fill"}
-                sizes="(max-width: 1536px) 100vw,(max-width: 1024px) 50vw,33vw"
+                sizes="(max-width: 1024px) 100vw,(max-width: 1536px) 50vw,33vw"
+                quality={100}
               />
               <button
                 onClick={() => {
