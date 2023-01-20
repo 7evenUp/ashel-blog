@@ -7,15 +7,6 @@ import { trpc } from "../../../utils/trpc";
 const Gallery: NextPage = () => {
   const createMutation = trpc.useMutation('gallery.create')
 
-  const handleCreate = async () => {
-    await createMutation.mutateAsync({
-      title: 'title321',
-      src: 'src123'
-    }, {
-      onSuccess: data => console.log(data)
-    })
-  }
-
   const onSelectFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) return;
     const file = e.target.files[0]; 
@@ -34,19 +25,12 @@ const Gallery: NextPage = () => {
 
       if (error) console.error(error);
       else {
-        console.log(uploadData)
         await createMutation.mutateAsync({
           title: '123',
           src: uploadData.path
         }, {
           onSuccess: data => console.log('Success upload:', data)
         })
-        // await pathMutation.mutateAsync({
-        //   id: post.id,
-        //   path: uploadData.path
-        // }, {
-        //   onSuccess: data => console.log('Success: ', data)
-        // })
       }
     }
   };
@@ -62,14 +46,6 @@ const Gallery: NextPage = () => {
           <span>Load Image</span>
           <input type="file" accept="image/*" onChange={onSelectFile} required />
         </label>
-
-        <button
-          type="button"
-          className="py-1 px-2 bg-beige rounded-md ml-auto"
-          onClick={handleCreate}
-        >
-          {createMutation.isLoading ? "Uploading photo..." : "Upload"}
-        </button>
       </div>
 
       <div className="grid gap-2 lg:gap-4 w-full lg:grid-cols-2 2xl:grid-cols-3 mt-5">
