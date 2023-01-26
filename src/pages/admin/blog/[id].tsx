@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Editor from "../../../components/Editor";
 import { prisma } from "../../../server/db/client";
-import { trpc } from "../../../utils/trpc";
+import { trpc } from "../../../lib/trpc";
 import { FloatButtons } from "../../../components";
 import { Modal } from "../../../components";
 import { env } from "../../../env/client.mjs";

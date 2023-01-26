@@ -3,6 +3,7 @@ import {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
+import { MDXRemote } from 'next-mdx-remote';
 import React from "react";
 import { prisma } from "../../server/db/client";
 import { EditorStateView } from "../../components/";

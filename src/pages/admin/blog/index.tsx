@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import PostCards from "../../../components/PostCards";
 import { env } from "../../../env/client.mjs";
 import { getServerAuthSession } from "../../../server/common/get-server-auth-session";
-import { trpc } from "../../../utils/trpc";
+import { trpc } from "../../../lib/trpc";
 
 const Blog: NextPage = () => {
   const [publishedPosts, setPublishedPosts] = useState<Post[]>([]);

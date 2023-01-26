@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../supabase/supabaseClient";
 import Image from "next/image";
-import { getShimmerBase64 } from "../utils/getShimmer";
+import { getShimmerBase64 } from "../lib/getShimmer";
 
 const GalleryImage = ({ path }: { path: string }) => {
   const [url, setUrl] = useState("");

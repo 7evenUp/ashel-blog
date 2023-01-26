@@ -4,7 +4,7 @@ import { useState } from "react";
 import { GalleryImage } from "../../../components";
 import { getServerAuthSession } from "../../../server/common/get-server-auth-session";
 import { supabase } from "../../../supabase/supabaseClient";
-import { trpc } from "../../../utils/trpc";
+import { trpc } from "../../../lib/trpc";
 
 const Gallery: NextPage = () => {
   const createMutation = trpc.useMutation("gallery.create");
