@@ -6,10 +6,10 @@ import {
 import { MDXRemote } from 'next-mdx-remote';
 import React from "react";
 import { prisma } from "../../server/db/client";
-import { EditorStateView } from "../../components";
 import { getFileBySlug, getFiles } from "../../lib/mdx";
 import { FrontMatterTypes, MdxSource } from "../../../global";
 import MDXComponents from "../../components/MDXComponents";
+import { dayjs } from "../../lib/dayjs";
 
 type Props = {
   frontMatter: FrontMatterTypes;
@@ -33,16 +33,24 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
   return { props: post };
 }
 
-export default function Blog({ mdxSource, frontMatter }: Props) {
+export default function BlogPost({ mdxSource, frontMatter }: Props) {
   console.log('FRONT MATTER: ', frontMatter)
   return (
     // <BlogLayout frontMatter={frontMatter}>
+    <>
+      <div className="flex flex-col gap-2">
+        <h1>{frontMatter.title}</h1>
+        <span>{dayjs(frontMatter.publishedAt).format('ll')}</span>
+        <span>{Math.ceil(frontMatter.readingTime.minutes)} мин. чтения</span>
+      </div>
       <MDXRemote
-        {...mdxSource}
-        components={{
-          ...MDXComponents,
-        }}
-      />
+          {...mdxSource}
+          components={{
+            ...MDXComponents,
+          }}
+        />
+    </>
+      
     // </BlogLayout>
   );
 }

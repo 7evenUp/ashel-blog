@@ -1,28 +1,29 @@
-import { Post } from "@prisma/client";
+// import { Post } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { StaticBlog } from "../../global";
 import { supabase } from "../supabase/supabaseClient";
 
-const Post = ({ post }: { post: Post }) => {
-  const [url, setUrl] = useState("");
+const Post = ({ post }: { post: StaticBlog }) => {
+  // const [url, setUrl] = useState("");
 
-  useEffect(() => {
-    const fetchImg = async () => {
-      if (post.image) {
-        const { data, error } = await supabase.storage
-          .from("photos")
-          .download(post.image);
-        if (error) console.error(error);
-        if (data) {
-          const url = URL.createObjectURL(data);
-          setUrl(url);
-        }
-      }
-    };
+  // useEffect(() => {
+  //   const fetchImg = async () => {
+  //     if (post.image) {
+  //       const { data, error } = await supabase.storage
+  //         .from("photos")
+  //         .download(post.image);
+  //       if (error) console.error(error);
+  //       if (data) {
+  //         const url = URL.createObjectURL(data);
+  //         setUrl(url);
+  //       }
+  //     }
+  //   };
 
-    fetchImg();
-  }, []);
+  //   fetchImg();
+  // }, []);
 
   return (
     <Link href={`/blog/${post.id}`}>
@@ -41,24 +42,23 @@ const Post = ({ post }: { post: Post }) => {
               <path d="M7.25 4H6V7.93443L10.375 10L11 9.19344L7.25 7.44262V4Z" />
             </svg>
             <span className="text-sm">
-              {post.publishedAt &&
-                new Date(post.publishedAt).toLocaleDateString()}
+              {post.publishedAt.toString()}
             </span>
           </div>
           <p className="text-base mobile:text-lg leading-relaxed">
-            {post.desc}
+            {post.summary}
           </p>
         </div>
 
         <div className="lg:basis-1/2 w-full lg:w-1/2 min-h-[236px] sm:h-[300px] relative">
-          {url && (
+          {/* {url && ( */}
             <Image
               className="object-cover grayscale group-hover:grayscale-0 duration-300"
-              src={url}
+              src={post.image}
               alt={post.title}
               layout="fill"
             />
-          )}
+          {/* )} */}
         </div>
       </a>
     </Link>
