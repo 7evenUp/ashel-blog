@@ -9,6 +9,7 @@ import { AdminLayout, Layout } from "../components";
 import type { AppRouter } from "../server/router";
 import { Analytics } from '@vercel/analytics/react';
 import "../styles/globals.css";
+import "../styles/prism.css";
 
 const MyApp: AppType = ({
   Component,
