@@ -37,11 +37,11 @@ export default function BlogPost({ mdxSource, frontMatter }: Props) {
   console.log('FRONT MATTER: ', frontMatter)
   return (
     // <BlogLayout frontMatter={frontMatter}>
-    <>
-      <div className="flex flex-col gap-2">
-        <h1>{frontMatter.title}</h1>
-        <span>{dayjs(frontMatter.publishedAt).format('ll')}</span>
-        <span>{Math.ceil(frontMatter.readingTime.minutes)} мин. чтения</span>
+    <div className="flex flex-col items-center mt-16 w-full">
+      <div className="flex flex-col items-center gap-2 mobile:gap-4">
+        <h1 className="text-2xl mobile:text-3xl sm:text-4xl md:text-5xl font-serif tracking-wider text-center">{frontMatter.title}</h1>
+        <span className="mobile:text-lg">{dayjs(frontMatter.publishedAt).format('ll')}</span>
+        <span className="text-sm mobile:text-base font-semibold">{Math.ceil(frontMatter.readingTime.minutes)} мин. чтения</span>
       </div>
       <MDXRemote
           {...mdxSource}
@@ -49,7 +49,7 @@ export default function BlogPost({ mdxSource, frontMatter }: Props) {
             ...MDXComponents,
           }}
         />
-    </>
+    </div>
       
     // </BlogLayout>
   );

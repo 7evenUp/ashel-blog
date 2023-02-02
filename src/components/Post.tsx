@@ -32,7 +32,7 @@ const Post = ({ post }: { post: StaticBlog }) => {
           <h3 className="text-2xl mobile:text-3xl sm:text-4xl md:text-5xl font-serif tracking-wider">
             {post.title}
           </h3>
-          <div className="flex gap-1 mobile:gap-2 items-center mt-2 mb-4">
+          <div className="flex gap-1 mobile:gap-2 items-center mt-4 mb-6">
             <svg
               className="w-3 h-3 mobile:w-[14px] mobile:h-[14px]"
               viewBox="0 0 14 14"
@@ -50,7 +50,7 @@ const Post = ({ post }: { post: StaticBlog }) => {
           </p>
         </div>
 
-        <div className="lg:basis-1/2 w-full lg:w-1/2 min-h-[236px] sm:h-[300px] relative">
+        <div className="lg:basis-1/2 w-full lg:w-1/2 min-h-[236px] sm:h-[300px] 2xl:h-[350px] relative">
           {/* {url && ( */}
             <Image
               className="object-cover grayscale group-hover:grayscale-0 duration-300"
