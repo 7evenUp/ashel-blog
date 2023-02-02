@@ -11,3 +11,5 @@ export { default as Post } from "./Post";
 export { default as PostCard } from "./PostCard";
 export { default as GalleryImage } from "./GalleryImage";
 export { default as MDXComponents } from "./MDXComponents";
+export { default as BlogHorizontalImage } from "./BlogHorizontalImage";
+export { default as BlogVerticalImage } from "./BlogVerticalImage";
