@@ -1,10 +1,10 @@
 import type { InferGetStaticPropsType } from "next";
 import { Post } from "../../components";
-import { getAllFilesFrontMatter } from "../../lib/mdx";
+import { getAllPublishedFilesFrontMatter } from "../../lib/mdx";
 import { groupBy } from "../../lib/groupBy";
 
 export const getStaticProps = async () => {
-  const blogPosts = await getAllFilesFrontMatter('blog');
+  const blogPosts = await getAllPublishedFilesFrontMatter('blog');
 
   const groupedBlogPosts = groupBy(blogPosts, 'year');
 

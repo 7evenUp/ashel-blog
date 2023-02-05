@@ -65,6 +65,7 @@ export async function getAllFilesFrontMatter(type: string) {
         "utf8"
       );
       const { data, content } = matter(source);
+      console.log('getAllFilesFrontMatter: ', data)
       return [
         {
           ...data,
@@ -79,6 +80,70 @@ export async function getAllFilesFrontMatter(type: string) {
   );
 
   return allPostsData.sort((a, b) => {
+    if (a.publishedAt < b.publishedAt) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+}
+
+export async function getAllPublishedFilesFrontMatter(type: string) {
+  const files = fs.readdirSync(path.join(root, "data", type));
+
+  const allPostsData: StaticBlog[] = files.reduce(
+    (allPosts: any, postSlug: string) => {
+      const source = fs.readFileSync(
+        path.join(root, "data", type, postSlug),
+        "utf8"
+      );
+      const { data, content } = matter(source);
+      return [
+        {
+          ...data,
+          id: postSlug.replace(/\.mdx$/, ""),
+          readingTime: readingTime(content).text.split("read")[0],
+          year: dayjs(data.publishedAt).year(),
+        },
+        ...allPosts,
+      ];
+    },
+    []
+  );
+
+  return allPostsData.filter((p => p.isPublished)).sort((a, b) => {
+    if (a.publishedAt < b.publishedAt) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+}
+
+export async function getAllUnpublishedFilesFrontMatter(type: string) {
+  const files = fs.readdirSync(path.join(root, "data", type));
+
+  const allPostsData: StaticBlog[] = files.reduce(
+    (allPosts: any, postSlug: string) => {
+      const source = fs.readFileSync(
+        path.join(root, "data", type, postSlug),
+        "utf8"
+      );
+      const { data, content } = matter(source);
+      return [
+        {
+          ...data,
+          id: postSlug.replace(/\.mdx$/, ""),
+          readingTime: readingTime(content).text.split("read")[0],
+          year: dayjs(data.publishedAt).year(),
+        },
+        ...allPosts,
+      ];
+    },
+    []
+  );
+
+  return allPostsData.filter((p => !p.isPublished)).sort((a, b) => {
     if (a.publishedAt < b.publishedAt) {
       return 1;
     } else {

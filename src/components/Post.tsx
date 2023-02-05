@@ -1,32 +1,12 @@
-// import { Post } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
 import { StaticBlog } from "../../global";
-import { supabase } from "../supabase/supabaseClient";
 
-const Post = ({ post }: { post: StaticBlog }) => {
-  // const [url, setUrl] = useState("");
-
-  // useEffect(() => {
-  //   const fetchImg = async () => {
-  //     if (post.image) {
-  //       const { data, error } = await supabase.storage
-  //         .from("photos")
-  //         .download(post.image);
-  //       if (error) console.error(error);
-  //       if (data) {
-  //         const url = URL.createObjectURL(data);
-  //         setUrl(url);
-  //       }
-  //     }
-  //   };
-
-  //   fetchImg();
-  // }, []);
-
+const Post = ({ post, isAdmin }: { post: StaticBlog, isAdmin?: boolean }) => {
+  const linkHref = isAdmin ? `/admin/blog/${post.id}` : `/blog/${post.id}`
+  
   return (
-    <Link href={`/blog/${post.id}`}>
+    <Link href={linkHref}>
       <a className="group flex gap-4 lg:gap-8 flex-col-reverse lg:flex-row border-b pb-8 hover:border-black duration-500 w-full">
         <div className="basis-1/2 flex flex-col">
           <h3 className="text-2xl mobile:text-3xl sm:text-4xl md:text-5xl font-serif tracking-wider">
@@ -51,14 +31,12 @@ const Post = ({ post }: { post: StaticBlog }) => {
         </div>
 
         <div className="lg:basis-1/2 w-full lg:w-1/2 min-h-[236px] sm:h-[300px] 2xl:h-[350px] relative">
-          {/* {url && ( */}
             <Image
               className="object-cover grayscale group-hover:grayscale-0 duration-300"
               src={post.image}
               alt={post.title}
               layout="fill"
             />
-          {/* )} */}
         </div>
       </a>
     </Link>

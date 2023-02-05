@@ -58,7 +58,7 @@ const CustomLink = (props: any) => {
 };
 
 const CustomHR = (props: any) => (
-  <div className="flex justify-center gap-2 my-8">
+  <div className="flex justify-center gap-2 my-10 mobile:my-20">
     {Array(5).fill(null).map((_, i) => (
       <span className="w-1 h-1 rounded-full bg-black"/>
     ))}

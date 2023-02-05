@@ -10,6 +10,7 @@ export type StaticBlog = {
   id: string;
   title: string;
   publishedAt: Date;
+  isPublished: boolean;
   summary: string;
   image: string;
   languageTags: string[];
