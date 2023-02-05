@@ -31,7 +31,7 @@ const CustomImage = (props: any) => {
       />
     </p>
   );
-}
+};
 
 const CustomLink = (props: any) => {
   const href = props.href;
@@ -59,15 +59,19 @@ const CustomLink = (props: any) => {
 
 const CustomHR = (props: any) => (
   <div className="flex justify-center gap-2 my-10 mobile:my-20">
-    {Array(5).fill(null).map((_, i) => (
-      <span className="w-1 h-1 rounded-full bg-black"/>
-    ))}
+    {Array(5)
+      .fill(null)
+      .map((_, i) => (
+        <span className="w-1 h-1 rounded-full bg-black" />
+      ))}
   </div>
-)
+);
 
 const MDXComponents = {
   h1: (props: any) => <h1 className="text-3xl lg:text-4xl mb-4" {...props} />,
-  h2: (props: any) => <h2 className="text-xl lg:text-2xl mb-2 text-grey" {...props} />,
+  h2: (props: any) => (
+    <h2 className="text-xl lg:text-2xl mb-2 text-grey" {...props} />
+  ),
   h3: (props: any) => (
     <h3 className="text-2xl lg:text-3xl mt-8 mb-2 font-bold" {...props} />
   ),
@@ -83,16 +87,21 @@ const MDXComponents = {
       {...props}
     ></p>
   ),
-  ul: (props: any) => <ul className=" list-disc flex flex-col gap-1 mb-4" {...props} />,
+  ul: (props: any) => (
+    <ul className=" list-disc flex flex-col gap-1 mb-4" {...props} />
+  ),
   ol: (props: any) => (
     <ol className="list-decimal flex flex-col gap-1 mb-4" {...props} />
   ),
   li: (props: any) => (
-    <li className="text-sm mobile:text-base lg:text-lg leading-relaxed ml-4 mobile:ml-8" {...props} />
+    <li
+      className="text-sm mobile:text-base lg:text-lg leading-relaxed ml-4 mobile:ml-8"
+      {...props}
+    />
   ),
   strong: Tstrong,
   BlogHorizontalImage,
-  BlogVerticalImage
+  BlogVerticalImage,
 };
 
 export default MDXComponents;

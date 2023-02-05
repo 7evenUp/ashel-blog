@@ -1,11 +1,6 @@
-import {
-  GetStaticPaths,
-  GetStaticPropsContext,
-  InferGetStaticPropsType,
-} from "next";
+import { GetStaticPaths } from "next";
 import { MDXRemote } from "next-mdx-remote";
 import React from "react";
-import { prisma } from "../../server/db/client";
 import { getFileBySlug, getFiles } from "../../lib/mdx";
 import { FrontMatterTypes, MdxSource } from "../../../global";
 import MDXComponents from "../../components/MDXComponents";
@@ -40,7 +35,6 @@ export const getStaticProps = async ({
 export default function BlogPost({ mdxSource, frontMatter }: Props) {
   console.log("FRONT MATTER: ", frontMatter);
   return (
-    // <BlogLayout frontMatter={frontMatter}>
     <div className="flex flex-col items-center mt-16 w-full">
       <div className="flex flex-col items-center gap-2 mobile:gap-4 mb-8">
         <h1 className="text-2xl mobile:text-3xl sm:text-4xl md:text-5xl font-serif tracking-wider text-center">
@@ -62,7 +56,5 @@ export default function BlogPost({ mdxSource, frontMatter }: Props) {
         />
       </article>
     </div>
-
-    // </BlogLayout>
   );
 }

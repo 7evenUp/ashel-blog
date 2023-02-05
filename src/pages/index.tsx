@@ -1,10 +1,9 @@
-import type { NextPage } from "next";
 import Head from "next/head";
 import React from "react";
 import { AboutItem, Contacts } from "../components";
 import { aboutData } from "../lib/AboutData";
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
     <>
       <Head>

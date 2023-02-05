@@ -11,7 +11,6 @@ import type { AppRouter } from "../server/router";
 import "../styles/globals.css";
 import "../styles/prism.css";
 
-
 const MyApp: AppType = ({
   Component,
   pageProps: { session, ...pageProps },
