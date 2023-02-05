@@ -70,7 +70,7 @@ const CustomHR = () => (
 const MDXComponents = {
   h1: (props: any) => <h1 className="text-3xl lg:text-4xl mb-4" {...props} />,
   h2: (props: any) => (
-    <h2 className="text-xl lg:text-2xl mb-2 text-grey" {...props} />
+    <h2 className="text-xl lg:text-2xl mb-2 mt-4 text-grey" {...props} />
   ),
   h3: (props: any) => (
     <h3 className="text-2xl lg:text-3xl mt-8 mb-2 font-bold" {...props} />

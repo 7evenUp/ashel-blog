@@ -17,7 +17,7 @@ export default function AboutItem({ heading, body, link }: AboutItemType) {
           className={`font-serif text-4xl sm:text-5xl text-white drop-shadow-[0_0_1px_rgb(0,0,0)] md:w-[348px] tracking-wider
             ${
               link &&
-              "group-hover:text-slate-700 group-hover:drop-shadow-none transition-all"
+              "group-hover:text-black group-hover:drop-shadow-none transition-all"
             }`}
         >
           {heading}
