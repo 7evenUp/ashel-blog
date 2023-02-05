@@ -31,7 +31,7 @@ export default function Contacts() {
         </ul>
         <ul className="flex flex-col gap-5 list-disc">
           <li className="hover:text-slate-700 hover:drop-shadow-none transition-all">
-            <a href="http://ashel.site/" target="_blank" rel="noreferrer">
+            <a href="https://7evenup.github.io/ashel-portfolio/build/index.html" target="_blank" rel="noreferrer">
               Сайт-Портфолио
             </a>
           </li>
