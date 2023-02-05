@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { trpc } from "../../utils/trpc";
+import { trpc } from "../../lib/trpc";
 import { GalleryImage } from "../../components/";
 
 const Gallery: NextPage = () => {

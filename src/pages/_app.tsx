@@ -1,34 +1,36 @@
-// src/pages/_app.tsx
 import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
 import { loggerLink } from "@trpc/client/links/loggerLink";
 import { withTRPC } from "@trpc/next";
 import { SessionProvider } from "next-auth/react";
-import type { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
-import { AdminLayout, Layout } from "../components";
+import { AdminLayout, Layout, MDXComponents } from "../components";
+import { Analytics } from "@vercel/analytics/react";
+import { MDXProvider } from "@mdx-js/react";
+import type { AppType } from "next/dist/shared/lib/utils";
 import type { AppRouter } from "../server/router";
-import { Analytics } from '@vercel/analytics/react';
 import "../styles/globals.css";
+import "../styles/prism.css";
 
 const MyApp: AppType = ({
   Component,
   pageProps: { session, ...pageProps },
-  router
+  router,
 }) => {
-
   return (
-    <SessionProvider session={session}>
-      {router.pathname.includes('admin') ? (
-        <AdminLayout>
-          <Component {...pageProps} />
-        </AdminLayout>
-      ) : (
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      )}
-      <Analytics />
-    </SessionProvider>
+    <MDXProvider components={MDXComponents}>
+      <SessionProvider session={session}>
+        {router.pathname.includes("admin") ? (
+          <AdminLayout>
+            <Component {...pageProps} />
+          </AdminLayout>
+        ) : (
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        )}
+        <Analytics />
+      </SessionProvider>
+    </MDXProvider>
   );
 };
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../supabase/supabaseClient";
 import Image from "next/image";
-import { getShimmerBase64 } from "../utils/getShimmer";
+import { getShimmerBase64 } from "../lib/getShimmer";
 
 const GalleryImage = ({ path }: { path: string }) => {
   const [url, setUrl] = useState("");
@@ -37,7 +37,7 @@ const GalleryImage = ({ path }: { path: string }) => {
         className="object-cover group-hover:scale-110 duration-300"
         src={url}
         layout={"fill"}
-        alt={'TODO'}
+        alt={"TODO"}
         sizes="(max-width: 1536px) 100vw,(max-width: 1024px) 50vw,33vw"
         placeholder="blur"
         blurDataURL={getShimmerBase64(350, 350)}
