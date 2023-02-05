@@ -27,7 +27,7 @@ const GalleryImage = ({ path }: { path: string }) => {
     };
 
     fetchImg();
-  }, []);
+  }, [path]);
 
   if (!isPhotoDownloaded) return null;
 

@@ -1,5 +1,4 @@
 import type { GetServerSideProps, NextPage } from "next";
-import Image from "next/image";
 import { useState } from "react";
 import { GalleryImage } from "../../../components";
 import { getServerAuthSession } from "../../../server/common/get-server-auth-session";
@@ -9,12 +8,12 @@ import { trpc } from "../../../lib/trpc";
 const Gallery: NextPage = () => {
   const createMutation = trpc.useMutation("gallery.create");
   const deleteMutation = trpc.useMutation("gallery.delete");
-  const { data, error, isLoading, refetch } = trpc.useQuery(["gallery.getAll"]);
+  const { data, refetch } = trpc.useQuery(["gallery.getAll"]);
 
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async (id: number, path: string) => {
-    const { data, error } = await supabase.storage
+    const { error } = await supabase.storage
       .from("photos")
       .remove([path]);
 

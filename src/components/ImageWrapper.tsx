@@ -28,7 +28,7 @@ const ImageWrapper = ({ title, desc, src }: ImageWrapperProps) => {
     };
 
     downloadImage(src);
-  }, []);
+  }, [src]);
 
   return (
     <div>
