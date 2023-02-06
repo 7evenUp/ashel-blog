@@ -10,7 +10,9 @@ isPublished: true
 
 ## Оглавление
 
-1.  [Знакомство](#знакомство)
+1. [Знакомство](#знакомство)
+2. [Выбор проекта](#выбор-проекта)
+3. [Практика](#практика)
 
 ### Знакомство
 
@@ -68,6 +70,103 @@ Reinforcement learning is a type of machine learning algorithm that trains model
 - playing video games (where the model receives rewards for winning and penalties for losing)
 - controlling robots (where the model learns how to perform tasks)
 - and trading stocks (where the model learns how to make investment decisions based on market trends).
+
+Отлично, мы поняли какие типы машинного обучения существуют. Перейдём к четвертому пункту, непосредственно к самим алгоритмам. Делаю поочерёдно запросы:
+
+> explain how linear regression works
+
+Linear regression is a supervised learning algorithm used for predicting continuous values (such as prices, temperatures, or weights) based on one or more input features. It assumes that there is a linear relationship between the input features and the target variable, and it seeks to find the best-fitting line to represent this relationship.
+
+The line is represented by an equation of the form y = b0 + b1x1 + b2x2 + ... + bnxn, where y is the target variable, b0 is the y-intercept, and b1, b2, ..., bn are the coefficients of the input features x1, x2, ..., xn. These coefficients determine the slope of the line, which represents the strength and direction of the relationship between each input feature and the target variable.
+
+To find the best-fitting line, the algorithm uses a method called least squares, which minimizes the sum of the squared differences between the actual target values and the predicted values based on the line's equation. This results in the optimization of the coefficients, which can be used to make predictions on new, unseen data.
+
+Linear regression can be applied to single-feature or multi-feature data, and it can be extended to polynomial or multiple regression, where the relationship between the target variable and the input features is represented by a more complex equation.
+
+> explain how k-nearest neighbors work
+
+K-Nearest Neighbors (KNN) is an unsupervised learning algorithm used for classification and regression. It is based on the idea of finding the closest data points (neighbors) in the feature space to make predictions.
+
+In KNN, each data point is represented by a set of features, and the algorithm finds the k data points that are closest (in terms of Euclidean distance or any other distance metric) to the new data point to be classified. The majority class of these k closest neighbors is then used to classify the new data point. In regression problems, the mean or median of the k closest neighbors is used to make predictions.
+
+The value of k is a hyperparameter that can be adjusted by the user, and it determines the number of neighbors that are considered for the prediction. A larger value of k will result in a smoother decision boundary, while a smaller value will result in a more complex boundary.
+
+KNN is a simple and intuitive algorithm that requires no prior training or feature engineering. It can handle non-linear data distributions and can be easily scaled to large datasets. However, it can be computationally expensive when working with high-dimensional data, and it may be sensitive to the choice of distance metric.
+
+> explain how decision tree works
+
+A decision tree is a tree-like model used for supervised learning in both classification and regression problems. The tree consists of internal nodes that represent decisions based on input features, and leaf nodes that represent the final prediction or output.
+
+The algorithm starts at the root of the tree and, based on the input features, follows a path through the tree to the appropriate leaf node. The internal nodes are split based on the feature that provides the greatest information gain, which measures the reduction in entropy or impurity of the data after a split. The splits are repeated recursively on the resulting subgroups until a stopping criterion is reached, such as a maximum depth or a minimum number of samples in a leaf node.
+
+In a classification problem, the prediction is made based on the majority class of the samples in a leaf node. In a regression problem, the prediction is made based on the mean or median of the samples in a leaf node.
+
+Decision trees are easy to understand and interpret, and they can handle both categorical and continuous data. They can also handle non-linear relationships between the input features and the target variable, but they may be prone to overfitting and may not generalize well to new data. To avoid overfitting, techniques such as pruning (removing unnecessary splits), cross-validation, or random forests (ensembles of decision trees) can be used.
+
+> explain how neural networks work
+
+Neural networks are a type of machine learning algorithm inspired by the structure and function of the human brain. They are used for both supervised and unsupervised learning tasks, such as image classification, speech recognition, and natural language processing.
+
+A neural network consists of an input layer, one or more hidden layers, and an output layer. Each layer consists of nodes (also known as neurons), which receive input from the previous layer, process the input through a non-linear activation function, and pass the output to the next layer.
+
+In supervised learning, the input features are passed through the network, and the output of the final layer is compared to the target values. The difference between the actual and predicted values is used to update the weights and biases of the nodes in the network, so that the network can learn to make more accurate predictions. This process is repeated multiple times until the network reaches a satisfactory level of accuracy on the training data.
+
+In unsupervised learning, the network is used to extract patterns and features from the input data without any prior knowledge of the target variables. The network can then be used for clustering, dimensionality reduction, or generative models.
+
+Neural networks are powerful models that can handle complex and non-linear relationships between the input features and the target variable. However, they require a large amount of data for training and can be prone to overfitting if not properly designed and trained. To avoid overfitting, techniques such as regularization, early stopping, or dropout can be used.
+
+***
+
+### Выбор проекта
+
+Что ж, по логике ChatGPT, мы прошли вводный курс теории, теперь готовы непосредственно к практике. Спрошу у нейронки, какие программы является _"Hello world"_ в мире машинного обучения:
+
+> What are "Hello world" starting projects in machine learning?
+
+"Hello world" starting projects in machine learning are simple and introductory projects that are designed to help beginners get started with machine learning. They are typically small, straightforward, and focused on a specific task, such as:
+
+1. Iris flower classification: This project involves using machine learning algorithms to classify iris flowers based on their sepal length, sepal width, petal length, and petal width. This is a classic example of a supervised classification problem.
+2. Handwritten digit recognition: This project involves using machine learning algorithms to recognize handwritten digits from the MNIST dataset. This is a supervised classification problem.
+3. Linear regression: This project involves using linear regression to predict a continuous value, such as the price of a house, based on one or more input features.
+4. Clustering: This project involves using clustering algorithms to group similar data points together based on their features. This is an unsupervised learning problem.
+
+These projects provide a good starting point for beginners to get a hands-on experience with machine learning, understand the basic concepts, and learn how to use different algorithms and libraries.
+
+Окей, в этом разобрались. Для себя лично выделил линейную регрессию, так как с точки зрения математики довольно таки просто и понятно. Спросим какие именно проблемы можно решить используя данный подход:
+
+> What kinds of projects are better for starting developing linear regression?
+
+Kinds of projects for starting development:
+
+- Predicting housing prices: Use linear regression to predict the prices of houses based on features such as square footage, number of bedrooms, and location.
+- Sales forecasting: Use linear regression to forecast sales based on factors such as advertising spend, seasonality, and economic indicators.
+- Predicting stock prices: Use linear regression to predict stock prices based on historical data and economic indicators.
+
+These projects are simple, straightforward, and provide a good starting point for developing your skills in linear regression. They will help you understand the basics of linear regression and how to implement it in practice.
+
+Тут меня сразу заинтересовал третий пункт - сам увлекаюсь финансами и торгую криптовалютой, поэтому почему бы не совместить полезное с приятным? Спрашиваю как именно начать разрабатывать это:
+
+> Explain all steps for developing linear regression for predicting stock prices
+
+Developing a linear regression model for predicting stock prices involves the following steps:
+
+1. Data collection: Collect the historical data for the stock you want to predict prices for. This data should include the stock's opening and closing prices, volume of shares traded, and any other relevant economic indicators that may affect the stock price.
+2. Data cleaning: Clean and pre-process the data to remove any missing values, outliers, and any irrelevant information. This is an important step to ensure that the data is ready for analysis.
+3. Exploratory Data Analysis (EDA): Perform EDA to understand the relationships between the stock price and the other variables. This can be done by creating plots and visualizing the data.
+4. Feature selection: Select the relevant variables that will be used as independent variables in the model. This is important to ensure that the model is not overfitting or underfitting the data.
+5. Model selection: Choose a suitable linear regression model for the problem. Simple linear regression can be used when there is only one independent variable, while multiple linear regression is used when there are multiple independent variables.
+6. Model training: Train the model using the training data. This involves estimating the parameters of the model and finding the best fit line that minimizes the sum of the squared errors between the predicted values and the actual values.
+7. Model evaluation: Evaluate the model using the test data. This involves calculating various evaluation metrics, such as mean squared error (MSE), root mean squared error (RMSE), mean absolute error (MAE), and R-squared, to determine the accuracy of the model.
+8. Model tuning: Fine-tune the model by adjusting the parameters and features until you get the desired level of accuracy.
+9. Deployment: Deploy the model in a suitable environment, such as a web app or a mobile app, to make predictions on new data.
+
+These steps will help you develop a linear regression model for predicting stock prices. It's important to note that stock price prediction is a challenging task and that linear regression may not always provide accurate results. However, it is a good starting point for developing your skills in machine learning.
+
+Ну что ж. За работу!
+
+***
+
+### Практика
 
 ***
 
