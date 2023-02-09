@@ -16,18 +16,14 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           <li
             className={router.pathname === "/admin/blog" ? "font-semibold" : ""}
           >
-            <Link href="/admin/blog">
-              <a>Блог</a>
-            </Link>
+            <Link href="/admin/blog">Блог</Link>
           </li>
           <li
             className={
               router.pathname === "/admin/gallery" ? "font-semibold" : ""
             }
           >
-            <Link href="/admin/gallery">
-              <a>Фотки</a>
-            </Link>
+            <Link href="/admin/gallery">Фотки</Link>
           </li>
         </ul>
       </header>

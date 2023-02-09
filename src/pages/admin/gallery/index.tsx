@@ -87,7 +87,7 @@ const Gallery: NextPage = () => {
         {data &&
           data.map((photo) => (
             <div key={photo.id} className="relative">
-              <GalleryImage path={photo.src} />
+              <GalleryImage path={photo.src} alt={photo.title} />
               <button
                 onClick={() => {
                   setIsDeleting(true);

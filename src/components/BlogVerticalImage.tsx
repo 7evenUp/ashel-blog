@@ -8,11 +8,11 @@ const BlogHorizontalImage = ({url, alt}: {url: string, alt: string}) => {
       <Image
         className="object-contain"
         src={url}
-        layout={"fill"}
         alt={alt}
-        sizes="(max-width: 1536px) 100vw,(max-width: 1024px) 50vw,33vw"
+        fill
+        quality={90}
         placeholder="blur"
-        blurDataURL={getShimmerBase64(350, 350)}
+        blurDataURL={getShimmerBase64(860, 650)}
       />
     </div>
   )

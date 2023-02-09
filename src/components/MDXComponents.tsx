@@ -23,11 +23,10 @@ const CustomImage = (props: any) => {
       <Image
         className="object-contain"
         src={props.src}
-        layout={"fill"}
         alt={props.alt}
-        sizes="(max-width: 1536px) 100vw,(max-width: 1024px) 50vw,33vw"
         placeholder="blur"
         blurDataURL={getShimmerBase64(350, 350)}
+        fill
       />
     </p>
   );
@@ -37,23 +36,15 @@ const CustomLink = (props: any) => {
   const href = props.href;
   const isInternalLink = href && (href.startsWith("/") || href.startsWith("#"));
 
-  if (isInternalLink) {
-    return (
-      <Link {...props}>
-        <a className="" {...props} />
-      </Link>
-    );
-  }
+  if (isInternalLink) return <Link {...props} />;
 
   return (
-    <Link {...props}>
-      <a
-        className="text-indigo-700 hover:text-indigo-400 transition-all"
-        target="_blank"
-        rel="noreferrer"
-        {...props}
-      />
-    </Link>
+    <Link
+      {...props}
+      className="text-indigo-700 hover:text-indigo-400 transition-all"
+      target="_blank"
+      rel="noreferrer"
+    />
   );
 };
 
