@@ -26,7 +26,9 @@ const Gallery: NextPage = () => {
       </h1>
       <div className="grid gap-2 lg:gap-4 w-full lg:grid-cols-2 2xl:grid-cols-3 mt-5">
         {data &&
-          data.map((photo) => <GalleryImage path={photo.src} key={photo.id} />)}
+          data.map((photo) => (
+            <GalleryImage path={photo.src} key={photo.id} alt={photo.title} />
+          ))}
       </div>
     </>
   );

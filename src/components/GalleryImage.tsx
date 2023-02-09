@@ -3,7 +3,7 @@ import { supabase } from "../supabase/supabaseClient";
 import Image from "next/image";
 import { getShimmerBase64 } from "../lib/getShimmer";
 
-const GalleryImage = ({ path }: { path: string }) => {
+const GalleryImage = ({ path, alt }: { path: string, alt: string }) => {
   const [url, setUrl] = useState("");
   const [isPhotoDownloaded, setIsPhotoDownloaded] = useState(false);
 
@@ -34,13 +34,13 @@ const GalleryImage = ({ path }: { path: string }) => {
   return (
     <div className="group relative w-full h-72 sm:h-80 md:h-96">
       <Image
-        className="object-cover group-hover:scale-110 duration-300"
+        className="object-cover group-hover:scale-110 group-hover:z-10 duration-300"
         src={url}
-        layout={"fill"}
-        alt={"TODO"}
-        sizes="(max-width: 1536px) 100vw,(max-width: 1024px) 50vw,33vw"
+        alt={alt}
+        fill
         placeholder="blur"
-        blurDataURL={getShimmerBase64(350, 350)}
+        blurDataURL={getShimmerBase64(490, 384)}
+        sizes="(max-width: 1536px) 100vw,(max-width: 1024px) 50vw,33vw"
       />
     </div>
   );
