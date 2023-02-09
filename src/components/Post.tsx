@@ -7,7 +7,7 @@ const Post = ({ post, isAdmin }: { post: StaticBlog; isAdmin?: boolean }) => {
 
   return (
     <Link href={linkHref}>
-      <a className="group flex gap-4 lg:gap-8 flex-col-reverse lg:flex-row border-b pb-8 hover:border-black duration-500 w-full">
+      <div className="group flex gap-4 lg:gap-8 flex-col-reverse lg:flex-row border-b pb-8 hover:border-black duration-500 w-full">
         <div className="basis-1/2 flex flex-col">
           <h3 className="text-2xl mobile:text-3xl sm:text-4xl md:text-5xl font-serif tracking-wider">
             {post.title}
@@ -36,7 +36,7 @@ const Post = ({ post, isAdmin }: { post: StaticBlog; isAdmin?: boolean }) => {
             layout="fill"
           />
         </div>
-      </a>
+      </div>
     </Link>
   );
 };

@@ -37,23 +37,15 @@ const CustomLink = (props: any) => {
   const href = props.href;
   const isInternalLink = href && (href.startsWith("/") || href.startsWith("#"));
 
-  if (isInternalLink) {
-    return (
-      <Link {...props}>
-        <a className="" {...props} />
-      </Link>
-    );
-  }
+  if (isInternalLink) return <Link {...props} />;
 
   return (
-    <Link {...props}>
-      <a
-        className="text-indigo-700 hover:text-indigo-400 transition-all"
-        target="_blank"
-        rel="noreferrer"
-        {...props}
-      />
-    </Link>
+    <Link
+      {...props}
+      className="text-indigo-700 hover:text-indigo-400 transition-all"
+      target="_blank"
+      rel="noreferrer"
+    />
   );
 };
 
