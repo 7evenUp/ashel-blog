@@ -23,11 +23,10 @@ const CustomImage = (props: any) => {
       <Image
         className="object-contain"
         src={props.src}
-        layout={"fill"}
         alt={props.alt}
-        sizes="(max-width: 1536px) 100vw,(max-width: 1024px) 50vw,33vw"
         placeholder="blur"
         blurDataURL={getShimmerBase64(350, 350)}
+        fill
       />
     </p>
   );
