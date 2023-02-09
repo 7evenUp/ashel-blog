@@ -10,6 +10,7 @@ const BlogHorizontalImage = ({url, alt}: {url: string, alt: string}) => {
         src={url}
         alt={alt}
         fill
+        quality={90}
         placeholder="blur"
         blurDataURL={getShimmerBase64(860, 650)}
       />

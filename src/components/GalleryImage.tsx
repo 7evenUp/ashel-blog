@@ -40,7 +40,7 @@ const GalleryImage = ({ path, alt }: { path: string, alt: string }) => {
         fill
         placeholder="blur"
         blurDataURL={getShimmerBase64(490, 384)}
-        sizes="(max-width: 1536px) 100vw,(max-width: 1024px) 50vw,33vw"
+        sizes="(max-width: 1024px) 100vw,(max-width: 1536px) 50vw,33vw"
       />
     </div>
   );

@@ -37,6 +37,8 @@ const Post = ({ post, isAdmin }: { post: StaticBlog; isAdmin?: boolean }) => {
             placeholder='blur'
             blurDataURL={getShimmerBase64(480, 300)}
             fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            quality={85}
           />
         </div>
       </div>
