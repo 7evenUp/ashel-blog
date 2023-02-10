@@ -1,4 +1,4 @@
-export default () => (
+const Contacts = () => (
   <div className="flex flex-col items-center gap-8 border-t border-b py-10">
     <h3>Полезные ссылки</h3>
     <div
@@ -31,3 +31,5 @@ const StyledLiWithLink = ({ href, title }: { href: string; title: string }) => (
     </a>
   </li>
 );
+
+export default Contacts

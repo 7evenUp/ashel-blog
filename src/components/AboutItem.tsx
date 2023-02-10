@@ -1,4 +1,4 @@
-export default ({
+const AboutItem = ({
   heading,
   text,
   link,
@@ -30,3 +30,5 @@ export default ({
     </p>
   </a>
 );
+
+export default AboutItem
