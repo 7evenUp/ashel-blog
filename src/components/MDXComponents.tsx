@@ -4,10 +4,6 @@ import { getShimmerBase64 } from "../lib/getShimmer";
 import BlogHorizontalImage from "./BlogHorizontalImage";
 import BlogVerticalImage from "./BlogVerticalImage";
 
-const Tstrong = (props: any) => (
-  <span className="font-bold text-red-500" {...props} />
-);
-
 const Quote = (props: any) => (
   <blockquote className="text-lg px-2 py-1 my-4 bg-beige" {...props}>
     <p className="italic text-black w-full">
@@ -66,8 +62,6 @@ const MDXComponents = {
   h3: (props: any) => (
     <h3 className="text-2xl lg:text-3xl mt-8 mb-2 font-bold" {...props} />
   ),
-  // kbd: Kbd,
-  // br: (props: any) => <Box height="24px" {...props} />,
   hr: CustomHR,
   a: CustomLink,
   blockquote: Quote,
@@ -90,7 +84,6 @@ const MDXComponents = {
       {...props}
     />
   ),
-  strong: Tstrong,
   BlogHorizontalImage,
   BlogVerticalImage,
 };
