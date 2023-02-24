@@ -12,7 +12,6 @@ export const getStaticProps = async () => {
   const blogPosts = await getAllPublishedFilesFrontMatter('blog');
 
   const groupedBlogPosts = groupBy(blogPosts, 'year');
-
   return {
     props: { blogPosts, groupedBlogPosts },
   };
@@ -21,19 +20,19 @@ export const getStaticProps = async () => {
 const Blog = ({blogPosts, groupedBlogPosts}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
-    <NextSeo
-        title={title}
-        description={description}
-        canonical={url}
-        openGraph={{
-          url,
-          title,
-          description,
-        }}
-      />
-    <div className="flex flex-col gap-24 mt-16 w-full">
-      {blogPosts.map((post) => <Post key={post.id} post={post} />)}
-    </div>
+      <NextSeo
+          title={title}
+          description={description}
+          canonical={url}
+          openGraph={{
+            url,
+            title,
+            description,
+          }}
+        />
+      <div className="flex flex-col gap-24 mt-16 w-full">
+        {blogPosts.map((post) => <Post key={post.id} post={post} />)}
+      </div>
     </>
   )
 };
