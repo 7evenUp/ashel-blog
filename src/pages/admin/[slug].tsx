@@ -1,8 +1,8 @@
-import { MDXComponents } from "../../../components";
+import { MDXComponents } from "../../components";
 import { GetStaticPaths } from "next/types";
-import { FrontMatterTypes, MdxSource } from "../../../../global";
-import { getFileBySlug, getFiles } from "../../../lib/mdx";
-import { dayjs } from "../../../lib/dayjs";
+import { FrontMatterTypes, MdxSource } from "../../../global";
+import { getFileBySlug, getFiles } from "../../lib/mdx";
+import { dayjs } from "../../lib/dayjs";
 import { MDXRemote } from "next-mdx-remote";
 
 type Props = {

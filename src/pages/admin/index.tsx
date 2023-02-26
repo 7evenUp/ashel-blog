@@ -1,72 +1,32 @@
-import type { GetServerSideProps, NextPage } from "next";
-import { useSession, signOut } from "next-auth/react";
-import { getServerAuthSession } from "../../server/common/get-server-auth-session";
-import { supabase } from "../../supabase/supabaseClient";
+import type { GetServerSideProps,  } from "next";
+import { getAllUnpublishedFilesFrontMatter } from "../../lib/mdx";
+import { groupBy } from "../../lib/groupBy";
+import { StaticBlog } from "../../../global";
+import { Post } from "../../components";
 
-const Admin: NextPage = () => {
-  const { data: session } = useSession();
+export const getServerSideProps: GetServerSideProps = async () => {
 
-  const onSelectFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files === null) return;
+  const blogPosts = await getAllUnpublishedFilesFrontMatter('blog');
+  const groupedBlogPosts = groupBy(blogPosts, 'year');
 
-    const file = e.target.files[0];
+  return { props: { posts: blogPosts, groupedBlogPosts } };
+};
 
-    if (file === undefined) return;
-
-    if (file.type && file.type.startsWith("image/")) {
-      const fileExt = file.name.split(".").pop();
-      const filePath = `111.${fileExt}`;
-
-      const { data: uploadData, error } = await supabase.storage
-        .from("photos")
-        .upload(filePath, file);
-
-      if (error) console.error(error);
-      else {
-        const { data, error } = await supabase
-          .from("Photo")
-          .insert([
-            { title: "title", desc: "description", src: uploadData.path },
-          ])
-          .select("id")
-          .single();
-
-        if (error) console.error(error);
-
-        console.log(data);
-      }
-    }
-  };
-
+const Admin = ({posts}: {posts: StaticBlog[]}) => {
+  console.log('ADMIN BLOG: ', posts)
   return (
     <>
-      <h1 className="text-[5rem] leading-normal font-extrabold text-white drop-shadow-[0_0_1px_rgb(0,0,0)]">
-        Admin page
-      </h1>
-      <div>
-        <h2>Add photo</h2>
-        <input type="file" accept="image/*" onChange={onSelectFile} required />
+      <div className="flex items-center gap-16 justify-start w-full">
+        <h1 className="text-5xl leading-normal font-extrabold text-white drop-shadow-[0_0_1px_rgb(0,0,0)]">
+          Неопубликованные посты / в разработке
+        </h1>
       </div>
-      <button type="button" onClick={() => signOut()}>
-        sign out
-      </button>
+
+      <div className="flex flex-col gap-24 mt-16 w-full">
+        {posts.map((post) => <Post key={post.id} post={post} isAdmin={true} />)}
+      </div>
     </>
   );
 };
 
 export default Admin;
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getServerAuthSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-
-  return { props: { session } };
-};
