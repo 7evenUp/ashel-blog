@@ -4,7 +4,7 @@ import { StaticBlog } from "../../global";
 import { getShimmerBase64 } from "../lib/getShimmer";
 
 const Post = ({ post, isAdmin }: { post: StaticBlog; isAdmin?: boolean }) => {
-  const linkHref = isAdmin ? `/admin/blog/${post.id}` : `/blog/${post.id}`;
+  const linkHref = isAdmin ? `/admin/${post.id}` : `/blog/${post.id}`;
 
   return (
     <Link href={linkHref}>

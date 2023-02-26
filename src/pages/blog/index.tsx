@@ -12,6 +12,7 @@ export const getStaticProps = async () => {
   const blogPosts = await getAllPublishedFilesFrontMatter('blog');
 
   const groupedBlogPosts = groupBy(blogPosts, 'year');
+
   return {
     props: { blogPosts, groupedBlogPosts },
   };
