@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin
+
+User-agent: *
+Allow: /
+
+Host: https://www.ashel.site/
+
+Sitemap: https://www.ashel.site/sitemap.xml

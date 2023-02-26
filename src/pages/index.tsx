@@ -10,13 +10,14 @@ const Home = () => {
         <title>Ashel Blog</title>
         <meta
           name="description"
-          content="Ashel's website-blog where you can find my personal info, interesting posts and pics"
+          content="Блог о личном, интеллектуальном и о непревзойдённом. Тут вы этого не увидите."
         />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+        <meta name="google-site-verification" content="EnqG-F_M_712OiRr2IfnJ6ydeFbe3LvvtPQrCyFkBqc" />
       </Head>
 
       <h1
