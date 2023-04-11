@@ -6,7 +6,7 @@ export const aboutData: Array<{
   {
     heading: "Занимаюсь разработкой",
     text: "Начал свой путь программиста в 2017. Началось с обычных сайтиков на HTML и CSS. Продолжилось созданием интерфейсов на React.js и серверной части на Node.js. Сейчас с Next.js работаю и мобилки на React Native делаю. Могу немного Python - парсинг сайтов, ИИ. Еще в Web3 развиваюсь.",
-    link: "https://7evenup.github.io/ashel-portfolio/build/index.html",
+    link: "https://ashel-portfolio.vercel.app/",
   },
   {
     heading: "Дизайню дизайны",

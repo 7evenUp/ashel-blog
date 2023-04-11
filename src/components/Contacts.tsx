@@ -15,7 +15,7 @@ const Contacts = () => (
       </ul>
       <ul className="flex flex-col gap-5 list-disc">
         <StyledLiWithLink
-          href="https://7evenup.github.io/ashel-portfolio/build/index.html"
+          href="https://ashel-portfolio.vercel.app/"
           title="Сайт-Портфолио"
         />
         <StyledLiWithLink href="https://github.com/7evenUp" title="Github" />

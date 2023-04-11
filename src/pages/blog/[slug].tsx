@@ -50,7 +50,7 @@ export default function BlogPost({ mdxSource, frontMatter }: Props) {
           type: "article",
           article: {
             publishedTime: dayjs(publishedAt).format("ll"),
-            authors: ['https://7evenup.github.io/ashel-portfolio/build/index.html']
+            authors: ['https://ashel-portfolio.vercel.app/']
           },
           images: [
             {
