@@ -1,11 +1,13 @@
-import Head from "next/head";
-import React from "react";
-import { AboutItem, Contacts } from "../components";
-import { aboutData } from "../lib/AboutData";
+import Head from "next/head"
+import Image from "next/image"
+import Link from "next/link"
+import AboutTabs from "../components/AboutTabs"
+import Socials from "../components/Socials"
+import handsomePic from "../../public/images/handsome.png"
 
 const Home = () => {
   return (
-    <>
+    <div className="min-h-screen bg-white flex justify-between pb-10">
       <Head>
         <title>Ashel Blog</title>
         <meta
@@ -13,35 +15,53 @@ const Home = () => {
           content="Блог о личном, интеллектуальном и о непревзойдённом. Тут вы этого не увидите."
         />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
       </Head>
 
-      <h1
-        className="self-end text-end sm:text-lg relative mt-16 mb-40 max-w-[413px]
-        before:w-3 before:h-full before:absolute before:bg-beige before:top-0 before:-left-3 sm:before:-left-8
-      "
-      >
-        Меня зовут Артём. Мне 21 год. Любитель выпить. Дипломированный
-        специалист. Безработный.
-      </h1>
+      <main className="flex-1">
+        <header className="bg-olive w-[640px] h-[225px] flex flex-col justify-between pl-28">
+          <div className="flex items-center gap-20 pt-6 text-white">
+            <Link href="/blog" className="hover:underline underline-offset-8">
+              Блог
+            </Link>
 
-      <div className="flex flex-col gap-24">
-        {aboutData.map((aboutItem, i) => {
-          if (i === 2)
-            return (
-              <React.Fragment key={i}>
-                <Contacts />
-                <AboutItem {...aboutItem} />
-              </React.Fragment>
-            );
-          return <AboutItem key={i} {...aboutItem} />;
-        })}
-      </div>
-    </>
-  );
-};
+            <Socials />
+          </div>
+          <h1 className="text-8xl text-white font-hand">Обо мне</h1>
+        </header>
 
-export default Home;
+        <div className="pl-28">
+          <AboutTabs />
+        </div>
+      </main>
+
+      <Image
+        className="h-max"
+        src={handsomePic}
+        alt="Handsome photo of me"
+        width={550}
+        quality={100}
+        priority
+      />
+    </div>
+  )
+}
+
+export default Home
