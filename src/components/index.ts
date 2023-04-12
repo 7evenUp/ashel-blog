@@ -1,7 +1,5 @@
 export { default as Header } from "./Header";
 export { default as Footer } from "./Footer";
-export { default as AboutItem } from "./AboutItem";
-export { default as Contacts } from "./Contacts";
 export { default as Layout } from "./Layout";
 export { default as Post } from "./Post";
 export { default as MDXComponents } from "./MDXComponents";
