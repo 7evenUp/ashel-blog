@@ -14,9 +14,6 @@ export default function Header() {
         <li className={router.pathname === "/blog" ? "font-semibold" : ""}>
           <Link href="/blog">Блог</Link>
         </li>
-        <li className={router.pathname === "/gallery" ? "font-semibold" : ""}>
-          <Link href="/gallery">Фотокарточки</Link>
-        </li>
       </ul>
     </header>
   );
