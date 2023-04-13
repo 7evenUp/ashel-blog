@@ -3,9 +3,9 @@ const AboutItem = ({
   text,
   link,
 }: {
-  heading: string;
-  text: string;
-  link?: string;
+  heading: string
+  text: string
+  link?: string
 }) => (
   <a
     href={link}
@@ -29,6 +29,6 @@ const AboutItem = ({
       {text}
     </p>
   </a>
-);
+)
 
 export default AboutItem

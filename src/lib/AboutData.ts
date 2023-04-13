@@ -1,7 +1,7 @@
 export const aboutData: Array<{
-  heading: string;
-  text: string;
-  link?: string;
+  heading: string
+  text: string
+  link?: string
 }> = [
   {
     heading: "Занимаюсь разработкой",
@@ -22,4 +22,4 @@ export const aboutData: Array<{
     text: "С самого детства занимался футболом, хоккеем и волейболом. В 2017 заиграл в большой футбол 11х11. На данный момент прекратил карьеру, однако про спорт не забываю и постоянно поддерживаю физическую форму в тонусе.",
     link: "https://www.instagram.com/ashel_sport/",
   },
-];
+]

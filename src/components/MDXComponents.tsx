@@ -1,8 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
-import { getShimmerBase64 } from "../lib/getShimmer";
-import BlogHorizontalImage from "./BlogHorizontalImage";
-import BlogVerticalImage from "./BlogVerticalImage";
+import Image from "next/image"
+import Link from "next/link"
+import { getShimmerBase64 } from "../lib/getShimmer"
+import BlogHorizontalImage from "./BlogHorizontalImage"
+import BlogVerticalImage from "./BlogVerticalImage"
 
 const Quote = (props: any) => (
   <blockquote className="text-lg px-2 py-1 my-4 bg-beige" {...props}>
@@ -10,10 +10,10 @@ const Quote = (props: any) => (
       {props.children[1].props.children}
     </p>
   </blockquote>
-);
+)
 
 const CustomImage = (props: any) => {
-  console.log(props);
+  console.log(props)
   return (
     <p className="relative w-full min-h-[181px]">
       <Image
@@ -25,14 +25,14 @@ const CustomImage = (props: any) => {
         fill
       />
     </p>
-  );
-};
+  )
+}
 
 const CustomLink = (props: any) => {
-  const href = props.href;
-  const isInternalLink = href && (href.startsWith("/") || href.startsWith("#"));
+  const href = props.href
+  const isInternalLink = href && (href.startsWith("/") || href.startsWith("#"))
 
-  if (isInternalLink) return <Link {...props} />;
+  if (isInternalLink) return <Link {...props} />
 
   return (
     <Link
@@ -41,8 +41,8 @@ const CustomLink = (props: any) => {
       target="_blank"
       rel="noreferrer"
     />
-  );
-};
+  )
+}
 
 const CustomHR = () => (
   <div className="flex justify-center gap-2 my-10 mobile:my-20">
@@ -52,7 +52,7 @@ const CustomHR = () => (
         <span key={i} className="w-1 h-1 rounded-full bg-black" />
       ))}
   </div>
-);
+)
 
 const MDXComponents = {
   h1: (props: any) => <h1 className="text-3xl lg:text-4xl mb-4" {...props} />,
@@ -86,6 +86,6 @@ const MDXComponents = {
   ),
   BlogHorizontalImage,
   BlogVerticalImage,
-};
+}
 
-export default MDXComponents;
+export default MDXComponents

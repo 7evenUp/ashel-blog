@@ -1,7 +1,4 @@
 User-agent: *
-Disallow: /admin
-
-User-agent: *
 Allow: /
 
 Host: https://www.ashel.site/

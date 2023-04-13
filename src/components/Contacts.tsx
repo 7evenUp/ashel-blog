@@ -22,7 +22,7 @@ const Contacts = () => (
       </ul>
     </div>
   </div>
-);
+)
 
 const StyledLiWithLink = ({ href, title }: { href: string; title: string }) => (
   <li className="drop-shadow-[0_0_1px_rgb(0,0,0)] hover:text-black hover:drop-shadow-none transition-all">
@@ -30,6 +30,6 @@ const StyledLiWithLink = ({ href, title }: { href: string; title: string }) => (
       {title}
     </a>
   </li>
-);
+)
 
 export default Contacts

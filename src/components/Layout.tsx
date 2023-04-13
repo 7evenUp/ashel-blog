@@ -1,11 +1,7 @@
-import Footer from "./Footer";
-import Header from "./Header";
+import Footer from "./Footer"
+import Header from "./Header"
 
-type LayoutProps = {
-  children: React.ReactNode;
-};
-
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Header />
@@ -16,7 +12,7 @@ const Layout = ({ children }: LayoutProps) => {
 
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

@@ -1,41 +1,42 @@
-import { GetStaticPaths } from "next";
-import { MDXRemote } from "next-mdx-remote";
-import React from "react";
-import { getFileBySlug, getFiles } from "../../lib/mdx";
-import { FrontMatterTypes, MdxSource } from "../../../global";
-import MDXComponents from "../../components/MDXComponents";
-import { dayjs } from "../../lib/dayjs";
-import { NextSeo } from "next-seo";
+import { GetStaticPaths } from "next"
+import { MDXRemote } from "next-mdx-remote"
+import { NextSeo } from "next-seo"
+
+import { getFileBySlug, getFiles } from "../../lib/mdx"
+import { dayjs } from "../../lib/dayjs"
+import MDXComponents from "../../components/MDXComponents"
+
+import { FrontMatterTypes, MdxSource } from "../../../global"
 
 type Props = {
-  frontMatter: FrontMatterTypes;
-  mdxSource: MdxSource;
-};
+  frontMatter: FrontMatterTypes
+  mdxSource: MdxSource
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await getFiles("blog");
+  const posts = await getFiles("blog")
 
   return {
     paths: posts.map((p) => ({
       params: { slug: p.replace(/\.mdx/, "") },
     })),
     fallback: false,
-  };
-};
+  }
+}
 
 export const getStaticProps = async ({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }) => {
-  const post = await getFileBySlug("blog", params.slug);
+  const post = await getFileBySlug("blog", params.slug)
 
-  return { props: post };
-};
+  return { props: post }
+}
 
 export default function BlogPost({ mdxSource, frontMatter }: Props) {
-  console.log("FRONT MATTER: ", frontMatter);
-  const { title, slug, summary, publishedAt, readingTime } = frontMatter;
+  console.log("FRONT MATTER: ", frontMatter)
+  const { title, slug, summary, publishedAt, readingTime } = frontMatter
 
   return (
     <>
@@ -50,16 +51,16 @@ export default function BlogPost({ mdxSource, frontMatter }: Props) {
           type: "article",
           article: {
             publishedTime: dayjs(publishedAt).format("ll"),
-            authors: ['https://ashel-portfolio.vercel.app/']
+            authors: ["https://ashel-portfolio.vercel.app/"],
           },
           images: [
             {
               url: `https://www.ashel.site/images/${slug}/cover.png`,
               width: 800,
               height: 600,
-              alt: title
-            }
-          ]
+              alt: title,
+            },
+          ],
         }}
       />
       <div className="flex flex-col items-center mt-16 w-full">
@@ -84,5 +85,5 @@ export default function BlogPost({ mdxSource, frontMatter }: Props) {
         </article>
       </div>
     </>
-  );
+  )
 }
