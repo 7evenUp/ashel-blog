@@ -77,6 +77,7 @@ const BlogPost: FC<PageProps> = ({ mdxSource, frontMatter }) => {
           </span>
         </div>
         <article className="flex flex-col w-full lg:max-w-[860px]">
+          {/* @ts-ignore */}
           <MDXRemote
             {...mdxSource}
             components={{
