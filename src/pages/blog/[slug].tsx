@@ -1,20 +1,21 @@
+import { FC } from "react"
 import { GetStaticPaths } from "next"
 import { MDXRemote } from "next-mdx-remote"
 import { NextSeo } from "next-seo"
 
-import { getFileBySlug, getFiles } from "../../lib/mdx"
-import { dayjs } from "../../lib/dayjs"
-import MDXComponents from "../../components/MDXComponents"
+import { getFileBySlug, getContentFiles } from "@/lib/mdx"
+import { dayjs } from "@/lib/dayjs"
+import MDXComponents from "@/components/MDXComponents"
 
 import { FrontMatterTypes, MdxSource } from "../../../global"
 
-type Props = {
+type PageProps = {
   frontMatter: FrontMatterTypes
   mdxSource: MdxSource
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await getFiles("blog")
+  const posts = await getContentFiles()
 
   return {
     paths: posts.map((p) => ({
@@ -29,12 +30,12 @@ export const getStaticProps = async ({
 }: {
   params: { slug: string }
 }) => {
-  const post = await getFileBySlug("blog", params.slug)
+  const post = await getFileBySlug(params.slug)
 
   return { props: post }
 }
 
-export default function BlogPost({ mdxSource, frontMatter }: Props) {
+const BlogPost: FC<PageProps> = ({ mdxSource, frontMatter }) => {
   console.log("FRONT MATTER: ", frontMatter)
   const { title, slug, summary, publishedAt, readingTime } = frontMatter
 
@@ -87,3 +88,6 @@ export default function BlogPost({ mdxSource, frontMatter }: Props) {
     </>
   )
 }
+
+
+export default BlogPost

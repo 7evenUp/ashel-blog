@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { StaticBlog } from "../../global"
-import { getShimmerBase64 } from "../lib/getShimmer"
+import { getShimmerBase64 } from "@/lib/getShimmer"
 
 const Post = ({ post }: { post: StaticBlog }) => {
   const linkHref = `/blog/${post.id}`

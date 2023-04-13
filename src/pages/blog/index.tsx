@@ -1,8 +1,8 @@
 import type { InferGetStaticPropsType } from "next"
 import { NextSeo } from "next-seo"
 
-import { getAllFilesFrontMatter } from "../../lib/mdx"
-import { Post } from "../../components"
+import { getAllFilesFrontMatter } from "@/lib/mdx"
+import { Post } from "@/components"
 
 const url = "https://www.ashel.site/blog"
 const title = "Ashel blog"
@@ -10,7 +10,7 @@ const description =
   "Programming tutorials, thoughts on different topics and lifehacks."
 
 export const getStaticProps = async () => {
-  const blogPosts = await getAllFilesFrontMatter("blog")
+  const blogPosts = await getAllFilesFrontMatter()
 
   return {
     props: { blogPosts },

@@ -15,19 +15,21 @@ import { StaticBlog } from "../../global"
 
 const root = process.cwd()
 
-export async function getFiles(type: string) {
-  return fs.readdirSync(path.join(root, "data", type))
+export async function getContentFiles() {
+  return fs.readdirSync(path.join(root, "src", "content"))
 }
 
-export async function getFileBySlug(type: string, slug: string) {
-  const source = slug
-    ? fs.readFileSync(path.join(root, "data", type, `${slug}.mdx`), "utf8")
-    : fs.readFileSync(path.join(root, "data", `${type}.mdx`), "utf8")
+export async function getFileBySlug(slug: string) {
+  const source = fs.readFileSync(
+    path.join(root, "src", "content", `${slug}.mdx`),
+    "utf8"
+  )
 
   const { data, content } = matter(source)
 
   const mdxSource = await serialize(source, {
     parseFrontmatter: true,
+    scope: {},
     mdxOptions: {
       remarkPlugins: [remarkGfm],
       rehypePlugins: [
@@ -57,13 +59,13 @@ export async function getFileBySlug(type: string, slug: string) {
   }
 }
 
-export async function getAllFilesFrontMatter(type: string) {
-  const files = fs.readdirSync(path.join(root, "data", type))
+export async function getAllFilesFrontMatter() {
+  const files = fs.readdirSync(path.join(root, "src", "content"))
 
   const allPostsData: StaticBlog[] = files.reduce(
     (allPosts: any, postSlug: string) => {
       const source = fs.readFileSync(
-        path.join(root, "data", type, postSlug),
+        path.join(root, "src", "content", postSlug),
         "utf8"
       )
       const { data, content } = matter(source)

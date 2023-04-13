@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { getShimmerBase64 } from "../lib/getShimmer"
+import { getShimmerBase64 } from "@/lib/getShimmer"
 
 const BlogHorizontalImage = ({ url, alt }: { url: string; alt: string }) => {
   return (

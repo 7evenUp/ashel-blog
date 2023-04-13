@@ -1,8 +1,8 @@
 import Head from "next/head"
 import { Fragment } from "react"
 
-import { AboutItem, Contacts } from "../components"
-import { aboutData } from "../lib/AboutData"
+import { AboutItem, Contacts } from "@/components"
+import { aboutData } from "@/lib/AboutData"
 
 const Home = () => {
   return (

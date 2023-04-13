@@ -1,8 +1,9 @@
-import { Layout, MDXComponents } from "../components"
 import { Analytics } from "@vercel/analytics/react"
 import { MDXProvider } from "@mdx-js/react"
 import { DefaultSeo } from "next-seo"
 import type { AppType } from "next/dist/shared/lib/utils"
+
+import { Layout, MDXComponents } from "@/components"
 
 import "../styles/globals.css"
 import "../styles/prism.css"
