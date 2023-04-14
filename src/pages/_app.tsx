@@ -6,7 +6,7 @@ import type { AppType } from "next/dist/shared/lib/utils"
 import { Layout, MDXComponents } from "@/components"
 
 import "../styles/globals.css"
-import "../styles/prism.css"
+import "../styles/rehypePrettyCode.css"
 
 const defaultSeoConfig = {
   title: "Ashel Blog",

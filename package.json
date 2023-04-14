@@ -12,6 +12,7 @@
     "@mdx-js/loader": "^2.2.1",
     "@mdx-js/react": "^2.2.1",
     "@next/mdx": "^13.1.5",
+    "@tailwindcss/typography": "^0.5.9",
     "@vercel/analytics": "^0.1.6",
     "dayjs": "^1.11.7",
     "gray-matter": "^4.0.3",
@@ -22,7 +23,9 @@
     "react-dom": "^18.2.0",
     "react-query": "^3.39.2",
     "reading-time": "^1.5.0",
-    "rehype-autolink-headings": "^6.1.1"
+    "rehype-autolink-headings": "^6.1.1",
+    "rehype-pretty-code": "^0.9.4",
+    "shiki": "^0.14.1"
   },
   "devDependencies": {
     "@types/node": "18.0.0",
