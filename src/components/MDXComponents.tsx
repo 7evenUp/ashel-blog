@@ -3,6 +3,8 @@ import Link from "next/link"
 import { getShimmerBase64 } from "../lib/getShimmer"
 import BlogHorizontalImage from "./BlogHorizontalImage"
 import BlogVerticalImage from "./BlogVerticalImage"
+import Callout from "./Callout"
+import Card from "./Card"
 
 const Quote = (props: any) => (
   <blockquote className="text-lg px-2 py-1 my-4 bg-beige" {...props}>
@@ -68,7 +70,7 @@ const MDXComponents = {
   img: CustomImage,
   p: (props: any) => (
     <p
-      className="text-base lg:text-lg text-black w-full mb-4 leading-relaxed lg:leading-loose"
+      className="text-base lg:text-lg text-black w-full leading-relaxed lg:leading-loose"
       {...props}
     ></p>
   ),
@@ -84,8 +86,13 @@ const MDXComponents = {
       {...props}
     />
   ),
+  code: (props: any) => (
+    <code className="bg-slate-300 rounded-md px-2 py-1 bg-opacity-50" {...props} />
+  ),
   BlogHorizontalImage,
   BlogVerticalImage,
+  Callout,
+  Card,
 }
 
 export default MDXComponents
